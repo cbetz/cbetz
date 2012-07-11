@@ -1,10 +1,6 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
-  , http = require('http');
+  , http = require('http')
+  , fs = require('fs');
 
 var app = express();
 
@@ -21,9 +17,10 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', function (req, res) {
-    fs.readFile(__dirname + '/public/index.html', 'utf8', function (err, text) {
-        res.send(text);
+app.get('/api/:resource', function (req, res) {
+    fs.readFile(__dirname + '/api/' + req.params.resource + '.json', 'utf8', function (err, data) {
+        res.contentType('json');
+		res.send(JSON.parse(data));
     });
 });
 

@@ -1,0 +1,172 @@
+{
+	"meta": {
+		"code": 200
+	},
+	"response": {
+		"resume": {
+			"education": [
+				{
+					"name": "Lehigh Univerity",
+					"graduated": "2004",
+					"degree": "B.S. Computer Engineering"
+				}
+			],
+			"skills": [
+				{
+					"name": "Android",
+					"type": ""
+				},
+				{
+					"name": "Java",
+					"type": ""
+				},
+				{
+					"name": "Android SDK",
+					"type": ""
+				},
+				{
+					"name": "Android 2.2+",
+					"type": ""
+				},
+				{
+					"name": "ASP.NET",
+					"type": ""
+				},
+				{
+					"name": ".NET Framework 4.0",
+					"type": ""
+				},
+				{
+					"name": ".NET AJAX Toolkit",
+					"type": ""
+				},
+				{
+					"name": "Telerik",
+					"type": ""
+				},
+				{
+					"name": "MVC 3",
+					"type": ""
+				},
+				{
+					"name": "WCF",
+					"type": ""
+				},
+				{
+					"name": "C#",
+					"type": ""
+				},
+				{
+					"name": "VB.NET",
+					"type": ""
+				},
+				{
+					"name": "SQL Server 2005/2008",
+					"type": ""
+				},
+				{
+					"name": "SSRS",
+					"type": ""
+				},
+				{
+					"name": "SSIS",
+					"type": ""
+				},
+				{
+					"name": "MySQL",
+					"type": ""
+				},
+				{
+					"name": "node.js",
+					"type": ""
+				},
+				{
+					"name": "Google App Engine",
+					"type": ""
+				},
+				{
+					"name": "JSON",
+					"type": ""
+				},
+				{
+					"name": "XML",
+					"type": ""
+				},
+				{
+					"name": "OAuth",
+					"type": ""
+				},
+				{
+					"name": "GQL",
+					"type": ""
+				}
+			],
+			"experience": [
+				{
+					"company": "Take Care Health Systems",
+					"notes": "Now Part of Walgreens",
+					"position": "Senior Application Developer",
+					"timeframe": "2005 - Current",
+					"responsibilities": [
+						{
+							"description": "Lead developer on large projects for web app supporting all aspects of business",
+							"order": 0
+						},
+						{
+							"description": "Developed and maintained public facing touch screen kiosk app",
+							"order": 1
+						},
+						{
+							"description": "Build Manager duties include organizing, building, and deploying all software builds for all products at an extremely rapid pace",
+							"order": 2
+						},
+						{
+							"description": "Developed Windows app using WCF webservices to supplement functionality of web app",
+							"order": 3
+						},
+						{
+							"description": "Responsible for creation and maintenance of stored procedures, functions, table changes, implementation scripts, and tuning",
+							"order": 4
+						},
+						{
+							"description": "Created and maintained SSIS packages for moving custom data extracts to third party clients",
+							"order": 5
+						},
+						{
+							"description": "Helped create and continues to guide current rapid and successful QA process",
+							"order": 6
+						},
+						{
+							"description": "Provided guidance to offshore team and junior app developers",
+							"order": 7
+						}
+					]
+				},
+				{
+					"company": "QA Associates",
+					"notes": "Now Part of TEKsystems",
+					"position": "QA Engineer",
+					"timeframe": "2004 - 2005",
+					"responsibilities": [
+						{
+							"description": "Designed, created, and maintained suite of automated testing scripts for several projects",
+							"order": 0
+						},
+						{
+							"description": "Solely responsible for QA testing large financial company's private label websites",
+							"order": 1
+						},
+						{
+							"description": "Created test lab",
+							"order": 2
+						},
+						{
+							"description": "Administered Mercury (HP) tools including Quality Center and LoadRunner",
+							"order": 3
+						}
+					]
+				}
+			]
+		}
+	}
+}
