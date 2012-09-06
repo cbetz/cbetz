@@ -17,6 +17,13 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.get('/', function (req, res) {
+	fs.readFile(__dirname + '/public/index.html', 'utf8', function (err, data) {
+		res.contentType('text/html');
+		res.send(data);
+	});
+});
+
 app.get('/api/:resource', function (req, res) {
     fs.readFile(__dirname + '/api/' + req.params.resource + '.json', 'utf8', function (err, data) {
         res.contentType('json');
