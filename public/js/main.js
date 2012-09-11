@@ -32,10 +32,19 @@ window.Router = Backbone.Router.extend({
         }
         $('#content').html(this.resumeView.el);
         this.headerView.select('menu-resume');
+    },
+	
+	contact: function () {
+        if (!this.contactView) {
+            this.contactView = new ContactView();
+            this.contactView.render();
+        }
+        $('#content').html(this.contactView.el);
+        this.headerView.select('menu-contact');
     }
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ResumeView"],
+templateLoader.load(["HomeView", "HeaderView", "ResumeView", "ContactView"],
     function () {
         app = new Router();
         Backbone.history.start();

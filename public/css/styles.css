@@ -1,0 +1,21 @@
+.social { list-style:none; }
+.social li { display:inline; float:left; margin-right: 25px;}
+.social li a { display:block; width:32px; height:32px; position:relative; }
+.social li a strong { position:absolute; left:20px; top:-1px;
+   text-shadow:1px 1px 0 rgba(0, 0, 0, 0.75); background-color:rgba(0, 0, 0, 0.7);
+   border-radius:3px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); color: white;
+}
+.social:hover li { opacity:0.2; }
+.social li { transition-property: opacity; transition-duration: 500ms; }
+.social li a strong { opacity:0;
+ transition-property: opacity, top; transition-duration: 300ms;
+}
+ 
+.social li:hover { opacity:1; }
+.social li:hover a strong { opacity:1; top:-10px; }
+ 
+li.gmail { background-image:url("../img/social/Mail.png"); }
+li.linkedin { background-image:url("../img/social/LinkedIn.png"); }
+li.twitter { background-image:url("../img/social/Twitter.png"); }
+li.github { background-image:url("../img/social/GitHub.png"); }
+li.googleplus { background-image:url("../img/social/Google+.png"); }
