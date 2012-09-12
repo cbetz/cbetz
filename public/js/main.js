@@ -24,6 +24,17 @@ window.Router = Backbone.Router.extend({
         $("#content").html(this.homeView.el);
         this.headerView.select('menu-home');
     },
+	
+	projects: function () {
+        if (!this.repoListView) {
+			var repoList = new RepoCollection();
+            this.repoListView = new RepoListView({ model: repoList });
+			repoList.fetch();
+            this.repoListView.render();
+        }
+        $('#content').html(this.repoListView.el);
+        this.headerView.select('menu-projects');
+    },
 
     resume: function () {
         if (!this.resumeView) {
@@ -44,7 +55,7 @@ window.Router = Backbone.Router.extend({
     }
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ResumeView", "ContactView"],
+templateLoader.load(["HomeView", "HeaderView", "ResumeView", "ContactView", "RepoListView"],
     function () {
         app = new Router();
         Backbone.history.start();

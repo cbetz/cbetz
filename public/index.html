@@ -18,6 +18,17 @@
     </style>
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
+	<script type="text/template" id="tpl-repo-list-item">
+	<div class="thumbnail plain">
+		<img src="https://raw.github.com/github/media/master/octocats/octocat_fluid.png" width="100" />
+		<div class="caption">
+			<h2><%= name %></h2>
+			<p><%= description %></p>
+			<p><a href="<%= html_url %>"><%= html_url %></a></p>
+			<p>Clone: <a href="<%= clone_url %>"><%= clone_url %></a></p>
+		</div>
+	</div>
+</script>
 </head>
 <body>
 	<div class="header"></div>
@@ -34,10 +45,13 @@
 	
 	<script src="js/utils.js"></script>
 		
+	<script src="js/models/repo.js"></script>
+	
 	<script src="js/views/header.js"></script>
 	<script src="js/views/home.js"></script>
 	<script src="js/views/resume.js"></script>
 	<script src="js/views/contact.js"></script>
+	<script src="js/views/repo.js"></script>
 	
 	<!-- this must be last! -->
 	<script src="js/main.js"></script>
