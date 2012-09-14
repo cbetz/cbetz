@@ -1,6 +1,7 @@
 var express = require('express')
   , http = require('http')
-  , fs = require('fs');
+  , fs = require('fs')
+  , request = require('request');
 
 var app = express();
 
@@ -22,6 +23,12 @@ app.get('/', function (req, res) {
 		res.contentType('text/html');
 		res.send(data);
 	});
+});
+
+app.get('/api/repos', function (req, res) {
+	var x = request('https://api.github.com/users/cbetz/repos');
+    req.pipe(x);
+    x.pipe(res);
 });
 
 app.get('/api/:resource', function (req, res) {
