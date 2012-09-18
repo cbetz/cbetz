@@ -31,10 +31,20 @@ app.get('/api/repos', function (req, res) {
     x.pipe(res);
 });
 
+app.get('/api/runs', function (req, res) {
+	var x = request('http://api.athlinks.com/athletes/results/36070135?format=json');
+    req.pipe(x);
+    x.pipe(res);
+});
+
 app.get('/api/:resource', function (req, res) {
     fs.readFile(__dirname + '/api/' + req.params.resource + '.json', 'utf8', function (err, data) {
-        res.contentType('json');
-		res.send(JSON.parse(data));
+        if (err) {
+			res.send(err);
+		} else {
+			res.contentType('json');
+			res.send(JSON.parse(data));
+		}
     });
 });
 

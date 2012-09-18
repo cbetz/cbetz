@@ -5,6 +5,7 @@ window.Router = Backbone.Router.extend({
 		"about": "about",
 		"projects": "projects",
 		"resume": "resume",
+		"running": "running",
         "contact": "contact"
     },
 
@@ -45,6 +46,17 @@ window.Router = Backbone.Router.extend({
         this.headerView.select('menu-resume');
     },
 	
+	running: function () {
+        if (!this.runListView) {
+			var runList = new RunCollection();
+            this.runListView = new RunListView({ model: runList });
+			runList.fetch();
+            this.runListView.render();
+        }
+        $('#content').html(this.runListView.el);
+        this.headerView.select('menu-running');
+    },
+	
 	contact: function () {
         if (!this.contactView) {
             this.contactView = new ContactView();
@@ -55,7 +67,7 @@ window.Router = Backbone.Router.extend({
     }
 });
 
-templateLoader.load(["HomeView", "HeaderView", "ResumeView", "ContactView", "RepoListView"],
+templateLoader.load(["HomeView", "HeaderView", "ResumeView", "ContactView", "RepoListView", "RepoListItemView", "RunListView", "RunListItemView"],
     function () {
         app = new Router();
         Backbone.history.start();

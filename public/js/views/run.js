@@ -1,24 +1,22 @@
-window.RepoListView = Backbone.View.extend({
+window.RunListView = Backbone.View.extend({
 	tagName:'ul',
-	className: "thumbnails",
 	
 	initialize:function () {
+		
 		this.model.bind("reset", this.render, this);                
 	},
 	
 	render:function (eventName) {
-		_.each(this.model.models, function (repo) {
-			$(this.el).append(new RepoListItemView({model:repo}).render().el);
+		_.each(this.model.models, function (run) {
+			$(this.el).append(new RunListItemView({model:run}).render().el);
 		}, this);
 		return this;
 	}     
 });
 
-window.RepoListItemView = Backbone.View.extend({
+window.RunListItemView = Backbone.View.extend({
 
 	tagName:"li",
-	
-	className: "span4",	
 	   
 	render:function (eventName) {
 		$(this.el).html(this.template(this.model.toJSON()));
