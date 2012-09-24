@@ -1,7 +1,8 @@
 var express = require('express')
   , http = require('http')
   , fs = require('fs')
-  , request = require('request');
+  , request = require('request')
+  , settings = require('./settings.json');
 
 var app = express();
 
@@ -18,6 +19,29 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+request('https://connect.garmin.com/signin', function (error, response, body) {
+	if (!error) {
+		request(
+			{ 	
+				method: 'POST',
+				uri: 'https://connect.garmin.com/signin',
+				form: {
+					'login': 'login', 
+					'javax.faces.ViewState': 'j_id2',
+					'login:loginUsernameField': settings.garminUsername,
+					'login:password': settings.garminPassword
+				}
+			}
+			, function (error, response, body) { 
+				if (error) {
+					console.log(error);
+				}
+		});
+	}
+});
+
+// routes
+
 app.get('/', function (req, res) {
 	fs.readFile(__dirname + '/public/index.html', 'utf8', function (err, data) {
 		res.contentType('text/html');
@@ -31,10 +55,33 @@ app.get('/api/repos', function (req, res) {
     x.pipe(res);
 });
 
-app.get('/api/runs', function (req, res) {
+app.get('/api/races', function (req, res) {
 	var x = request('http://api.athlinks.com/athletes/results/36070135?format=json');
     req.pipe(x);
     x.pipe(res);
+});
+
+app.get('/api/runs', function (req, res) {
+	request(
+		{ 	
+			method: 'POST',
+			uri: 'https://connect.garmin.com/signin',
+			form: {
+				'login': 'login', 
+				'javax.faces.ViewState': 'j_id2',
+				'login:loginUsernameField': settings.garminUsername,
+				'login:password': settings.garminPassword
+			}
+		}
+		, function (error, response, body) {
+			if (!error) {
+				request('https://connect.garmin.com/proxy/activity-search-service-1.2/json/activities?&start=0&limit=50', function (error, response, body) {					
+					res.charset = 'utf-8';
+					res.contentType('application/json');
+					res.send(body);
+				});
+			}
+	});
 });
 
 app.get('/api/:resource', function (req, res) {
