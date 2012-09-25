@@ -1,9 +1,10 @@
 window.RunListView = Backbone.View.extend({
-	tagName:'ul',
-	
-	initialize:function () {
+	tagName: 'ul',
+	className: 'unstyled',
+	initialize: function () {
 		
-		this.model.bind("reset", this.render, this);                
+		this.model.bind("reset", this.render, this);
+		
 	},
 	
 	render:function (eventName) {
@@ -16,9 +17,9 @@ window.RunListView = Backbone.View.extend({
 
 window.RunListItemView = Backbone.View.extend({
 
-	tagName:"li",
+	tagName: "li",
 	   
-	render:function (eventName) {
+	render: function (eventName) {
 		$(this.el).html(this.template(this.model.toJSON()));
 		return this;
 	}   

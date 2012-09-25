@@ -19,27 +19,6 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-request('https://connect.garmin.com/signin', function (error, response, body) {
-	if (!error) {
-		request(
-			{ 	
-				method: 'POST',
-				uri: 'https://connect.garmin.com/signin',
-				form: {
-					'login': 'login', 
-					'javax.faces.ViewState': 'j_id2',
-					'login:loginUsernameField': settings.garminUsername,
-					'login:password': settings.garminPassword
-				}
-			}
-			, function (error, response, body) { 
-				if (error) {
-					console.log(error);
-				}
-		});
-	}
-});
-
 // routes
 
 app.get('/', function (req, res) {
@@ -62,25 +41,15 @@ app.get('/api/races', function (req, res) {
 });
 
 app.get('/api/runs', function (req, res) {
-	request(
-		{ 	
-			method: 'POST',
-			uri: 'https://connect.garmin.com/signin',
-			form: {
-				'login': 'login', 
-				'javax.faces.ViewState': 'j_id2',
-				'login:loginUsernameField': settings.garminUsername,
-				'login:password': settings.garminPassword
-			}
+	getRuns(function (error, response, body) {
+		if (response.statusCode == 200) {	
+			res.charset = 'utf-8';
+			res.contentType('application/json');
+			res.send(body);
+		} else {
+			res.contentType('text/html');
+			res.send(body);
 		}
-		, function (error, response, body) {
-			if (!error) {
-				request('https://connect.garmin.com/proxy/activity-search-service-1.2/json/activities?&start=0&limit=50', function (error, response, body) {					
-					res.charset = 'utf-8';
-					res.contentType('application/json');
-					res.send(body);
-				});
-			}
 	});
 });
 
@@ -94,6 +63,40 @@ app.get('/api/:resource', function (req, res) {
 		}
     });
 });
+
+function garminLogin(callback) {
+	request('https://connect.garmin.com/signin', function (error, response, body) {
+		if (!error) {
+			request(
+				{ 	
+					method: 'POST',
+					uri: 'https://connect.garmin.com/signin',
+					form: {
+						'login': 'login', 
+						'javax.faces.ViewState': 'j_id2',
+						'login:loginUsernameField': settings.garminUsername,
+						'login:password': settings.garminPassword
+					}
+				}
+				, function (error, response, body) { 
+					callback(error, response, body);
+			});
+		}
+	});
+}
+function getRuns(callback) {
+	request('https://connect.garmin.com/proxy/activity-search-service-1.2/json/activities?&start=0&limit=50', function (error, response, body) {					
+		if (response.statusCode == 403) {
+			garminLogin(function(error, response, body) {
+				getRuns(function(error, response, body) {
+					callback(error, response, body);
+				});
+			});
+		} else {	
+			callback(error, response, body);
+		}
+	});
+}
 
 http.createServer(app).listen(8080);
 

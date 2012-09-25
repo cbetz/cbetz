@@ -1,3 +1,5 @@
 <div>
-	<h2><%= RaceName %></h2>
+	<h1><%= activity.activitySummary.SumDistance.withUnitAbbr %></h1>
+	<h3><%= activity.activitySummary.WeightedMeanPace.withUnitAbbr %> - <%= activity.activitySummary.SumEnergy.withUnit %></h3>
+	<p class="muted"><%= activity.activitySummary.BeginTimestamp.display %></p>
 </div>
