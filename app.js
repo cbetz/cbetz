@@ -30,15 +30,14 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api/repos', function (req, res) {
-	var x = request('https://api.github.com/users/cbetz/repos');
-    req.pipe(x);
-    x.pipe(res);
-});
-
-app.get('/api/races', function (req, res) {
-	var x = request('http://api.athlinks.com/athletes/results/36070135?format=json');
-    req.pipe(x);
-    x.pipe(res);
+	request('https://api.github.com/users/cbetz/repos', function(error, response, body) {
+		if (error) {
+			res.send(error);
+		} else {
+			res.send(JSON.parse(body));
+		}
+	});
+    
 });
 
 app.get('/api/runs', function (req, res) {
