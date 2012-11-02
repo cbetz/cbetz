@@ -1,12 +1,12 @@
 {
   "name": "cbetz",
-  "version": "0.0.4-3",
+  "version": "0.0.4-4",
   "private": true,
   "scripts": {
     "start": "app.js"
   },
   "dependencies": {
-    "express": "3.0.0rc4",
+    "express": "3.0.1",
     "request": "2.11.1"
   },
   "subdomain": "cbetz",
