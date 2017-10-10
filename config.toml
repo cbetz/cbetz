@@ -1,0 +1,40 @@
+baseURL = "http://cbetz.com/"
+languageCode = "en-us"
+title = "Chris Betz"
+theme = "hugo-sustain" 
+googleAnalytics = "UA-20420622-1"
+
+[permalinks]
+  post = "/:year/:month/:day/:slug"
+
+[params]
+  avatar = "profile.jpg"
+  author = "Chris Betz"
+  description = "Chris Betz"
+
+  # Custom assets can be linked with their paths relative to static/
+  custom_css = []
+  custom_js  = []
+
+[params.social]
+  Github        = "cbetz"
+  Email         = "chris@betzsoftware.com"
+  Twitter       = "thechrisbetz"
+  LinkedIn      = "christopherbetz"
+
+## Main Menu
+[[menu.main]]
+  name = "blog"
+  weight = 100
+  identifier = "blog"
+  url = "/blog/"
+[[menu.main]]
+  name = "projects"
+  identifier = "projects"
+  weight = 200
+  url = "/projects/"
+[[menu.main]]
+  name = "resume"
+  identifier = "resume"
+  weight = 300
+  url = "/resume/"
