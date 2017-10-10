@@ -1,4 +1,4 @@
-baseURL = "http://cbetz.com/"
+baseURL = "https://cbetz.com/"
 languageCode = "en-us"
 title = "Chris Betz"
 theme = "hugo-sustain" 
