@@ -1,0 +1,21 @@
+html, body {
+    border-top: 3px solid #659DBD;
+} 
+
+.container a {
+    color: #659DBD;
+}
+.container a:hover {
+    color: #5786AE;
+}
+
+.panel-default h4 a, h5 a {
+    color: #659DBD;
+}
+.panel-default h4 a:hover, h5 a:hover {
+    color: #5786AE;
+}
+
+div.footer{
+    border-bottom: 5px solid #659DBD;
+}
