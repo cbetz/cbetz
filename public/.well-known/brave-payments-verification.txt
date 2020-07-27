@@ -1,4 +1,0 @@
-This is a Brave Payments publisher verification file.
-
-Domain: cbetz.com
-Token: bf89b8f09bf0e63678cdc10ddda96d052d82b767b6bd87b910d37d075048bf8c
