@@ -5,7 +5,7 @@ theme = "hugo-theme-codex"
 title = "Chris Betz"
 languageCode = "en-us"
 baseURL = "https://cbetz.com/"
-copyright = "© {year}"
+copyright = "© Betz Software LLC {year}"
 
 # Add your Disqus shortname here.
 # disqusShortname = ""
@@ -32,7 +32,7 @@ googleAnalytics = "UA-20420622-1"
   # Titles for your icons (shown as tooltips), and also their display order.
   # Currently, these icons are supported: 
   #   "Twitter", "GitHub", "Email", "Facebook", "GitLab", "Instagram", "LinkedIn", "YouTube"
-  iconTitles = ["Twitter", "GitHub", "Email", "LinkedIn", "YouTube"]
+  iconTitles = ["Twitter", "GitHub", "Email", "LinkedIn"]
 
   # Metadata for Twitter cards, defaults to params.twitter
   # twitterSite = "@<your handle>"
