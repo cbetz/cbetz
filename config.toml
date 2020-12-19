@@ -8,7 +8,7 @@ baseURL = "https://cbetz.com/"
 copyright = "© Betz Software LLC {year}"
 
 # Add your Disqus shortname here.
-# disqusShortname = ""
+disqusShortname = "cbetz"
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
 googleAnalytics = "UA-20420622-1" 
