@@ -1,10 +1,11 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
-import Layout from '../components/layout'
-import { getAllPostsForHome } from '../lib/api'
-import Head from 'next/head'
+import Container from '../components/container';
+import MoreStories from '../components/more-stories';
+import HeroPost from '../components/hero-post';
+import Intro from '../components/intro';
+import Layout from '../components/layout';
+import Profile from '../components/profile';
+import { getAllPostsForHome } from '../lib/api';
+import Head from 'next/head';
 
 export default function Index({ preview, allPosts }) {
   const heroPost = allPosts[0]
@@ -17,6 +18,7 @@ export default function Index({ preview, allPosts }) {
         </Head>
         <Container>
           <Intro />
+          <Profile />
           {heroPost && (
             <HeroPost
               title={heroPost.title}
