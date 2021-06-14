@@ -1,4 +1,4 @@
-import { FiGithub, FiTwitter, FiYoutube } from "react-icons/fi";
+import { FiGithub, FiTwitter, FiYoutube, FiLinkedin } from "react-icons/fi";
 
 export default function Profile() {
   return (
@@ -16,20 +16,32 @@ export default function Profile() {
           ></div>
 
           <h1 className="text-3xl font-bold pt-8 lg:pt-0">Chris Betz</h1>
-          <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+          <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2"></div>
 
           <p className="pt-8 text-sm">
-            Totally optional short description about yourself, what you do and
-            so on.
+            Currently CTO at{" "}
+            <a className="underline" href="https://newoceanhealth.com">
+              New Ocean Health
+            </a>
+            . <br></br>
+            Building software at{" "}
+            <a className="underline" href="https://unitedeffects.com">
+              United Effects
+            </a>{" "}
+            and{" "}
+            <a className="underline" href="https://betzsoftware.com.com">
+              Betz Software
+            </a>
+            .
           </p>
 
-          <div className="pt-12 pb-8">
-            <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
-              Get In Touch
-            </button>
-          </div>
-
           <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
+            <a
+              className="link"
+              href="http://www.linkedin.com/in/christopherbetz"
+            >
+              <FiLinkedin size="2em"></FiLinkedin>
+            </a>
             <a className="link" href="https://twitter.com/thechrisbetz">
               <FiTwitter size="2em"></FiTwitter>
             </a>
