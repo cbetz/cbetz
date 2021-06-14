@@ -54,7 +54,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <div class="w-full lg:w-2/5">
+      <div className="w-full lg:w-2/5">
         <img
           src="https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png"
           className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
