@@ -20,16 +20,31 @@ export default function Profile() {
 
           <p className="pt-8 text-sm">
             Currently CTO at{" "}
-            <a className="underline" href="https://newoceanhealth.com">
+            <a
+              className="underline"
+              href="https://newoceanhealth.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               New Ocean Health
             </a>
             . <br></br>
             Building software at{" "}
-            <a className="underline" href="https://unitedeffects.com">
+            <a
+              className="underline"
+              href="https://unitedeffects.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               United Effects
             </a>{" "}
             and{" "}
-            <a className="underline" href="https://betzsoftware.com.com">
+            <a
+              className="underline"
+              href="https://betzsoftware.com.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               Betz Software
             </a>
             .
@@ -39,16 +54,33 @@ export default function Profile() {
             <a
               className="link"
               href="http://www.linkedin.com/in/christopherbetz"
+              target="_blank"
+              rel="noreferrer"
             >
               <FiLinkedin size="2em"></FiLinkedin>
             </a>
-            <a className="link" href="https://twitter.com/thechrisbetz">
+            <a
+              className="link"
+              href="https://twitter.com/thechrisbetz"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FiTwitter size="2em"></FiTwitter>
             </a>
-            <a className="link" href="https://github.com/cbetz">
+            <a
+              className="link"
+              href="https://github.com/cbetz"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FiGithub size="2em"></FiGithub>
             </a>
-            <a className="link" href="http://www.youtube.com/c/ChrisBetz">
+            <a
+              className="link"
+              href="http://www.youtube.com/c/ChrisBetz"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FiYoutube size="2em"></FiYoutube>
             </a>
           </div>
