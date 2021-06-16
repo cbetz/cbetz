@@ -10,7 +10,6 @@ import SectionSeparator from "../../components/section-separator";
 import Layout from "../../components/layout";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
-import { CMS_NAME } from "../../lib/constants";
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
@@ -29,9 +28,7 @@ export default function Post({ post, morePosts, preview }) {
           <>
             <article>
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{post.title} | cbetz.com</title>
                 <meta property="og:image" content={post.coverImage.url} />
               </Head>
               <PostHeader
