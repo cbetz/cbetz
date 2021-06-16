@@ -8,5 +8,5 @@ export default function Avatar({ name, picture }) {
       />
       <div className="text-xl font-bold">{name}</div>
     </div>
-  )
+  );
 }
