@@ -17,6 +17,26 @@ content {
 }
 `;
 
+const PORTFOLIO_GRAPHQL_FIELDS = `
+slug
+title
+coverImage {
+  url
+}
+date
+author {
+  name
+  picture {
+    url
+  }
+}
+excerpt
+content {
+  json
+}
+tags
+`;
+
 async function fetchGraphQL(query, preview = false) {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -41,6 +61,10 @@ function extractPost(fetchResponse) {
 
 function extractPostEntries(fetchResponse) {
   return fetchResponse?.data?.postCollection?.items;
+}
+
+function extractPortfolioItemEntries(fetchResponse) {
+  return fetchResponse?.data?.portfolioItemCollection?.items;
 }
 
 export async function getPreviewPostBySlug(slug) {
@@ -113,4 +137,18 @@ export async function getPostAndMorePosts(slug, preview) {
     post: extractPost(entry),
     morePosts: extractPostEntries(entries),
   };
+}
+
+export async function getAllPortfolioItems(preview) {
+  const entries = await fetchGraphQL(
+    `query {
+      portfolioItemCollection(order: date_DESC, preview: ${preview ? "true" : "false"}) {
+        items {
+          ${PORTFOLIO_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  return extractPortfolioItemEntries(entries);
 }
