@@ -63,6 +63,10 @@ function extractPostEntries(fetchResponse) {
   return fetchResponse?.data?.postCollection?.items;
 }
 
+function extractPortfolioItem(fetchResponse) {
+  return fetchResponse?.data?.portfolioItemCollection?.items?.[0];
+}
+
 function extractPortfolioItemEntries(fetchResponse) {
   return fetchResponse?.data?.portfolioItemCollection?.items;
 }
@@ -139,6 +143,19 @@ export async function getPostAndMorePosts(slug, preview) {
   };
 }
 
+export async function getAllPortfolioItemsWithSlug() {
+  const entries = await fetchGraphQL(
+    `query {
+      postCollection(where: { slug_exists: true }, order: date_DESC) {
+        items {
+          ${PORTFOLIO_GRAPHQL_FIELDS}
+        }
+      }
+    }`
+  );
+  return extractPostEntries(entries);
+}
+
 export async function getAllPortfolioItems(preview) {
   const entries = await fetchGraphQL(
     `query {
@@ -151,4 +168,35 @@ export async function getAllPortfolioItems(preview) {
     preview
   );
   return extractPortfolioItemEntries(entries);
+}
+
+export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
+  const entry = await fetchGraphQL(
+    `query {
+      postCollection(where: { slug: "${slug}" }, preview: ${
+      preview ? "true" : "false"
+    }, limit: 1) {
+        items {
+          ${PORTFOLIO_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  const entries = await fetchGraphQL(
+    `query {
+      postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
+      preview ? "true" : "false"
+    }, limit: 2) {
+        items {
+          ${PORTFOLIO_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+    preview
+  );
+  return {
+    post: extractPortfolioItem(entry),
+    morePosts: extractPortfolioItemEntries(entries),
+  };
 }

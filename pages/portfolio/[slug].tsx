@@ -8,7 +8,7 @@ import Header from "../../components/header";
 import PostHeader from "../../components/post-header";
 import SectionSeparator from "../../components/section-separator";
 import Layout from "../../components/layout";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
+import { getAllPortfolioItemsWithSlug, getPortfolioItemAndMorePortfolioItems } from "../../lib/api";
 import PostTitle from "../../components/post-title";
 
 export default function Post({ post, morePosts, preview }) {
@@ -51,7 +51,7 @@ export default function Post({ post, morePosts, preview }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const data = await getPostAndMorePosts(params.slug, preview);
+  const data = await getPortfolioItemAndMorePortfolioItems(params.slug, preview);
 
   return {
     props: {
@@ -63,7 +63,7 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getAllPostsWithSlug();
+  const allPosts = await getAllPortfolioItemsWithSlug();
   return {
     paths: allPosts?.map(({ slug }) => `/blog/${slug}`) ?? [],
     fallback: true,
