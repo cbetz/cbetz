@@ -26,7 +26,7 @@ export default function PortfolioItemPreview({
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
       {tags &&
         tags.map((tag) => (
-          <span className="mr-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          <span key={tag} className="mr-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
             {tag}
           </span>
         ))}
