@@ -18,6 +18,9 @@ export default function Index({ preview, allPosts }) {
         </Head>
         <Container>
           <Intro />
+          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+            About
+          </h2>
           <Profile />
           <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
             Blog
