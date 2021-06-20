@@ -173,7 +173,7 @@ export async function getAllPortfolioItems(preview) {
 export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
   const entry = await fetchGraphQL(
     `query {
-      postCollection(where: { slug: "${slug}" }, preview: ${
+      portfolioItemCollection(where: { slug: "${slug}" }, preview: ${
       preview ? "true" : "false"
     }, limit: 1) {
         items {
@@ -185,7 +185,7 @@ export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
   );
   const entries = await fetchGraphQL(
     `query {
-      postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
+      portfolioItemCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
       preview ? "true" : "false"
     }, limit: 2) {
         items {

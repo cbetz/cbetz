@@ -4,6 +4,7 @@ import HeroPost from "../../components/hero-post";
 import Layout from "../../components/layout";
 import { getAllPostsForHome } from "../../lib/api";
 import Head from "next/head";
+import Header from "../../components/header";
 
 export default function Index({ preview, allPosts }) {
   const heroPost = allPosts[0];
@@ -15,6 +16,7 @@ export default function Index({ preview, allPosts }) {
           <title>Chris Betz&apos;s Blog</title>
         </Head>
         <Container>
+          <Header />
           <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
             Blog
           </h2>

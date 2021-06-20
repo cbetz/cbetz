@@ -4,10 +4,11 @@ import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
 import Layout from "../components/layout";
 import Profile from "../components/profile";
-import { getAllPostsForHome } from "../lib/api";
+import { getAllPortfolioItems, getAllPostsForHome } from "../lib/api";
 import Head from "next/head";
+import PortfolioItems from "../components/portfolio-items";
 
-export default function Index({ preview, allPosts }) {
+export default function Index({ preview, allPosts, allPortfolioItems }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
   return (
@@ -22,6 +23,10 @@ export default function Index({ preview, allPosts }) {
             About
           </h2>
           <Profile />
+          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+            Portfolio
+          </h2>
+          <PortfolioItems posts={allPortfolioItems} />
           <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
             Blog
           </h2>
@@ -44,7 +49,8 @@ export default function Index({ preview, allPosts }) {
 
 export async function getStaticProps({ preview = false }) {
   const allPosts = (await getAllPostsForHome(preview)) ?? [];
+  const allPortfolioItems = (await getAllPortfolioItems(preview)) ?? [];
   return {
-    props: { preview, allPosts },
+    props: { preview, allPosts, allPortfolioItems },
   };
 }

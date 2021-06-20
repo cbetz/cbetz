@@ -1,6 +1,6 @@
 import Link from "next/link";
 import DateComponent from "../components/date";
-import CoverImage from "./cover-image";
+import PortfolioCoverImage from "./portfolio-cover-image";
 
 export default function PortfolioItemPreview({
   title,
@@ -13,10 +13,10 @@ export default function PortfolioItemPreview({
   return (
     <div>
       <div className="mb-5">
-        <CoverImage title={title} slug={slug} url={coverImage.url} />
+        <PortfolioCoverImage title={title} slug={slug} url={coverImage.url} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
-        <Link as={`/blog/${slug}`} href="/blog/[slug]">
+        <Link as={`/portfolio/${slug}`} href="/portfolio/[slug]">
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>

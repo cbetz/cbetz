@@ -2,7 +2,7 @@ import { FiGithub, FiTwitter, FiYoutube, FiLinkedin } from "react-icons/fi";
 
 export default function Profile() {
   return (
-    <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto my-32 lg:my-0">
+    <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto my-32">
       <div
         id="profile"
         className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0"

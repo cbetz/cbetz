@@ -65,7 +65,7 @@ export async function getStaticProps({ params, preview = false }) {
 export async function getStaticPaths() {
   const allPosts = await getAllPortfolioItemsWithSlug();
   return {
-    paths: allPosts?.map(({ slug }) => `/blog/${slug}`) ?? [],
+    paths: allPosts?.map(({ slug }) => `/portfolio/${slug}`) ?? [],
     fallback: true,
   };
 }
