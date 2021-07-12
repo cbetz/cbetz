@@ -13,6 +13,7 @@ export default function PortfolioItems({ posts }) {
             tags={post.tags}
             slug={post.slug}
             excerpt={post.excerpt}
+            link={post.link}
           />
         ))}
       </div>

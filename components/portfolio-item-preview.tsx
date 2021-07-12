@@ -9,6 +9,7 @@ export default function PortfolioItemPreview({
   excerpt,
   tags,
   slug,
+  link,
 }) {
   return (
     <div>
@@ -24,9 +25,22 @@ export default function PortfolioItemPreview({
         <DateComponent dateString={date} />
       </div>
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+      {link && (
+        <p className="text-lg leading-relaxed mb-4">
+          {
+            // eslint-disable-next-line react/jsx-no-target-blank
+            <a className="hover:underline" href={link} target="_blank">
+              Learn More
+            </a>
+          }
+        </p>
+      )}
       {tags &&
         tags.map((tag) => (
-          <span key={tag} className="mr-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          <span
+            key={tag}
+            className="mr-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+          >
             {tag}
           </span>
         ))}

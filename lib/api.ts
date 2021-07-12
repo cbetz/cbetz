@@ -35,6 +35,7 @@ content {
   json
 }
 tags
+link
 `;
 
 async function fetchGraphQL(query, preview = false) {
@@ -159,7 +160,9 @@ export async function getAllPortfolioItemsWithSlug() {
 export async function getAllPortfolioItems(preview) {
   const entries = await fetchGraphQL(
     `query {
-      portfolioItemCollection(order: date_DESC, preview: ${preview ? "true" : "false"}) {
+      portfolioItemCollection(order: date_DESC, preview: ${
+        preview ? "true" : "false"
+      }) {
         items {
           ${PORTFOLIO_GRAPHQL_FIELDS}
         }
