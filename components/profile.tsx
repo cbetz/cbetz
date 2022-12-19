@@ -19,33 +19,14 @@ export default function Profile() {
           <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2"></div>
 
           <p className="pt-8 text-sm">
-            Currently CTO at{" "}
+            Currently Senior Director of Software Engineering at{" "}
             <a
               className="underline"
-              href="https://newoceanhealth.com"
+              href="https://brightside.com"
               target="_blank"
               rel="noreferrer"
             >
-              New Ocean Health
-            </a>
-            . <br></br>
-            Building software at{" "}
-            <a
-              className="underline"
-              href="https://unitedeffects.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              United Effects
-            </a>{" "}
-            and{" "}
-            <a
-              className="underline"
-              href="https://betzsoftware.com.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Betz Software
+              Brightside Health
             </a>
             .
           </p>
