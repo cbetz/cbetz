@@ -14,8 +14,8 @@ export default function PortfolioCoverImage({ title, url, slug = null }) {
   return (
     <div className="sm:mx-0">
       {slug ? (
-        <Link as={`/portfolio/${slug}`} href="/portfolio/[slug]">
-          <a aria-label={title}>{image}</a>
+        <Link as={`/portfolio/${slug}`} href="/portfolio/[slug]" aria-label={title}>
+          {image}
         </Link>
       ) : (
         image

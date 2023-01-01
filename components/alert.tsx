@@ -15,10 +15,11 @@ export default function Alert({ preview }) {
           {preview ? (
             <>
               This is page is a preview.{" "}
-              <Link href="/api/exit-preview">
-                <a className="underline hover:text-cyan duration-200 transition-colors">
+              <Link
+                href="/api/exit-preview">
+                
                   Click here
-                </a>
+                
               </Link>{" "}
               to exit preview mode.
             </>

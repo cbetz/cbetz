@@ -14,8 +14,8 @@ export default function BlogCoverImage({ title, url, slug = null }) {
   return (
     <div className="sm:mx-0">
       {slug ? (
-        <Link as={`/blog/${slug}`} href="/blog/[slug]">
-          <a aria-label={title}>{image}</a>
+        <Link as={`/blog/${slug}`} href="/blog/[slug]" aria-label={title}>
+          {image}
         </Link>
       ) : (
         image
