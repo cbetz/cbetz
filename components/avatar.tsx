@@ -1,8 +1,12 @@
+import Image from "next/image";
+
 export default function Avatar({ name, picture }) {
   return (
     <div className="flex items-center">
-      <img
+      <Image
         src={picture.url}
+        width="12"
+        height="12"
         className="w-12 h-12 rounded-full mr-4"
         alt={name}
       />
