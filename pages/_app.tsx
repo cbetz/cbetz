@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }) {
         strategy="afterInteractive"
       />
       <Script
+        id="gtag-init"
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
