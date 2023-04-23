@@ -1,5 +1,5 @@
-import "../styles/index.css";
 import Script from "next/script";
+import { MantineProvider } from "@mantine/core";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -18,7 +18,16 @@ function MyApp({ Component, pageProps }) {
       gtag('config', 'UA-20420622-1');`,
         }}
       />
-      <Component {...pageProps} />
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "light",
+        }}
+      >
+        <Component {...pageProps} />
+      </MantineProvider>
     </>
   );
 }
