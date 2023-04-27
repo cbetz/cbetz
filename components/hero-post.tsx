@@ -9,7 +9,7 @@ export default function HeroPost({
   date,
   excerpt,
   author,
-  slug,
+  slug, 
 }) {
   return (
     <section>
