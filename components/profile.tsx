@@ -19,14 +19,14 @@ export default function Profile() {
           <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2"></div>
 
           <p className="pt-8 text-sm">
-            Currently Senior Director of Software Engineering at{" "}
+            Currently CTO at{" "}
             <a
               className="underline"
-              href="https://brightside.com"
+              href="https://www.aptihealth.com/"
               target="_blank"
               rel="noreferrer"
             >
-              Brightside Health
+              aptihealth
             </a>
             .
           </p>
