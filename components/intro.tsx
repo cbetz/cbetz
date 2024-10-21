@@ -5,5 +5,5 @@ export default function Intro() {
         Chris Betz
       </h1>
     </section>
-  );
+  ); 
 }
