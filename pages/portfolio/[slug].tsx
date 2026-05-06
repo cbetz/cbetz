@@ -8,10 +8,22 @@ import Header from "../../components/header";
 import PostHeader from "../../components/post-header";
 import SectionSeparator from "../../components/section-separator";
 import Layout from "../../components/layout";
-import { getAllPortfolioItemsWithSlug, getPortfolioItemAndMorePortfolioItems } from "../../lib/api";
+import {
+  getAllPortfolioItemsWithSlug,
+  getPortfolioItemAndMorePortfolioItems,
+} from "../../lib/api";
 import PostTitle from "../../components/post-title";
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from "next";
 
-export default function Post({ post, morePosts, preview }) {
+export default function Post({
+  post,
+  morePosts,
+  preview,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
   if (!router.isFallback && !post) {
@@ -22,7 +34,7 @@ export default function Post({ post, morePosts, preview }) {
     <Layout preview={preview}>
       <Container>
         <Header />
-        {router.isFallback ? (
+        {router.isFallback || !post ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
@@ -50,9 +62,15 @@ export default function Post({ post, morePosts, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const data = await getPortfolioItemAndMorePortfolioItems(params.slug, preview);
-
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = false,
+}) => {
+  const slug = params?.slug;
+  if (typeof slug !== "string") {
+    return { notFound: true };
+  }
+  const data = await getPortfolioItemAndMorePortfolioItems(slug, preview);
   return {
     props: {
       preview,
@@ -60,12 +78,12 @@ export async function getStaticProps({ params, preview = false }) {
       morePosts: data?.morePosts ?? null,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPortfolioItemsWithSlug();
   return {
     paths: allPosts?.map(({ slug }) => `/portfolio/${slug}`) ?? [],
     fallback: true,
   };
-}
+};

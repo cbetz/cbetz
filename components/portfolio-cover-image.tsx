@@ -1,8 +1,20 @@
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import type { ContentfulAsset } from "../lib/types";
 
-export default function PortfolioCoverImage({ title, url, width, height, slug = null }) {
+type Props = ContentfulAsset & {
+  title: string;
+  slug?: string | null;
+};
+
+export default function PortfolioCoverImage({
+  title,
+  url,
+  width,
+  height,
+  slug = null,
+}: Props) {
   const image = (
     <Image
       src={url}

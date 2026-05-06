@@ -5,8 +5,12 @@ import Layout from "../../components/layout";
 import { getAllPostsForHome } from "../../lib/api";
 import Head from "next/head";
 import Header from "../../components/header";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function Index({ preview, allPosts }) {
+export default function Index({
+  preview,
+  allPosts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
   return (
@@ -37,9 +41,9 @@ export default function Index({ preview, allPosts }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const allPosts = (await getAllPostsForHome(preview)) ?? [];
   return {
     props: { preview, allPosts },
   };
-}
+};

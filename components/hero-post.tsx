@@ -2,6 +2,7 @@ import Link from "next/link";
 import Avatar from "../components/avatar";
 import DateComponent from "../components/date";
 import BlogCoverImage from "./blog-cover-image";
+import type { Post } from "../lib/types";
 
 export default function HeroPost({
   title,
@@ -9,8 +10,8 @@ export default function HeroPost({
   date,
   excerpt,
   author,
-  slug, 
-}) {
+  slug,
+}: Pick<Post, "title" | "coverImage" | "date" | "excerpt" | "author" | "slug">) {
   return (
     <section>
       <div className="mb-8 md:mb-16">

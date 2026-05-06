@@ -4,7 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function preview(req: NextApiRequest, res: NextApiResponse) {
   const { secret, slug } = req.query;
 
-  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET || !slug) {
+  if (
+    secret !== process.env.CONTENTFUL_PREVIEW_SECRET ||
+    typeof slug !== "string"
+  ) {
     return res.status(401).json({ message: "Invalid token" });
   }
 

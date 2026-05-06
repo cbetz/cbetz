@@ -7,8 +7,13 @@ import Profile from "../components/profile";
 import { getAllPortfolioItems, getAllPostsForHome } from "../lib/api";
 import Head from "next/head";
 import PortfolioItems from "../components/portfolio-items";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function Index({ preview, allPosts, allPortfolioItems }) {
+export default function Index({
+  preview,
+  allPosts,
+  allPortfolioItems,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
   return (
@@ -47,10 +52,10 @@ export default function Index({ preview, allPosts, allPortfolioItems }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const allPosts = (await getAllPostsForHome(preview)) ?? [];
   const allPortfolioItems = (await getAllPortfolioItems(preview)) ?? [];
   return {
     props: { preview, allPosts, allPortfolioItems },
   };
-}
+};

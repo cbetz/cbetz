@@ -1,3 +1,5 @@
+import type { PortfolioItem, Post } from "./types";
+
 const POST_GRAPHQL_FIELDS = `
 slug
 title
@@ -42,8 +44,15 @@ tags
 link
 `;
 
-async function fetchGraphQL(query, preview = false) {
-  return fetch(
+type GraphQLResponse<T> = {
+  data?: T;
+};
+
+async function fetchGraphQL<T>(
+  query: string,
+  preview = false
+): Promise<GraphQLResponse<T>> {
+  const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
       method: "POST",
@@ -57,27 +66,22 @@ async function fetchGraphQL(query, preview = false) {
       },
       body: JSON.stringify({ query }),
     }
-  ).then((response) => response.json());
+  );
+  return response.json();
 }
 
-function extractPost(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items?.[0];
-}
+type PostCollectionResponse = {
+  postCollection: { items: Post[] };
+};
 
-function extractPostEntries(fetchResponse) {
-  return fetchResponse?.data?.postCollection?.items;
-}
+type PortfolioItemCollectionResponse = {
+  portfolioItemCollection: { items: PortfolioItem[] };
+};
 
-function extractPortfolioItem(fetchResponse) {
-  return fetchResponse?.data?.portfolioItemCollection?.items?.[0];
-}
-
-function extractPortfolioItemEntries(fetchResponse) {
-  return fetchResponse?.data?.portfolioItemCollection?.items;
-}
-
-export async function getPreviewPostBySlug(slug) {
-  const entry = await fetchGraphQL(
+export async function getPreviewPostBySlug(
+  slug: string
+): Promise<Post | undefined> {
+  const entry = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
@@ -87,11 +91,11 @@ export async function getPreviewPostBySlug(slug) {
     }`,
     true
   );
-  return extractPost(entry);
+  return entry.data?.postCollection.items[0];
 }
 
-export async function getAllPostsWithSlug() {
-  const entries = await fetchGraphQL(
+export async function getAllPostsWithSlug(): Promise<Post[] | undefined> {
+  const entries = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(where: { slug_exists: true }, order: date_DESC) {
         items {
@@ -100,11 +104,13 @@ export async function getAllPostsWithSlug() {
       }
     }`
   );
-  return extractPostEntries(entries);
+  return entries.data?.postCollection.items;
 }
 
-export async function getAllPostsForHome(preview) {
-  const entries = await fetchGraphQL(
+export async function getAllPostsForHome(
+  preview: boolean
+): Promise<Post[] | undefined> {
+  const entries = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(order: date_DESC, preview: ${preview ? "true" : "false"}) {
         items {
@@ -114,11 +120,14 @@ export async function getAllPostsForHome(preview) {
     }`,
     preview
   );
-  return extractPostEntries(entries);
+  return entries.data?.postCollection.items;
 }
 
-export async function getPostAndMorePosts(slug, preview) {
-  const entry = await fetchGraphQL(
+export async function getPostAndMorePosts(
+  slug: string,
+  preview: boolean
+): Promise<{ post: Post | undefined; morePosts: Post[] | undefined }> {
+  const entry = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(where: { slug: "${slug}" }, preview: ${
       preview ? "true" : "false"
@@ -130,7 +139,7 @@ export async function getPostAndMorePosts(slug, preview) {
     }`,
     preview
   );
-  const entries = await fetchGraphQL(
+  const entries = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
       preview ? "true" : "false"
@@ -143,13 +152,15 @@ export async function getPostAndMorePosts(slug, preview) {
     preview
   );
   return {
-    post: extractPost(entry),
-    morePosts: extractPostEntries(entries),
+    post: entry.data?.postCollection.items[0],
+    morePosts: entries.data?.postCollection.items,
   };
 }
 
-export async function getAllPortfolioItemsWithSlug() {
-  const entries = await fetchGraphQL(
+export async function getAllPortfolioItemsWithSlug(): Promise<
+  Post[] | undefined
+> {
+  const entries = await fetchGraphQL<PostCollectionResponse>(
     `query {
       postCollection(where: { slug_exists: true }, order: date_DESC) {
         items {
@@ -158,11 +169,13 @@ export async function getAllPortfolioItemsWithSlug() {
       }
     }`
   );
-  return extractPostEntries(entries);
+  return entries.data?.postCollection.items;
 }
 
-export async function getAllPortfolioItems(preview) {
-  const entries = await fetchGraphQL(
+export async function getAllPortfolioItems(
+  preview: boolean
+): Promise<PortfolioItem[] | undefined> {
+  const entries = await fetchGraphQL<PortfolioItemCollectionResponse>(
     `query {
       portfolioItemCollection(order: date_DESC, preview: ${
         preview ? "true" : "false"
@@ -174,11 +187,17 @@ export async function getAllPortfolioItems(preview) {
     }`,
     preview
   );
-  return extractPortfolioItemEntries(entries);
+  return entries.data?.portfolioItemCollection.items;
 }
 
-export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
-  const entry = await fetchGraphQL(
+export async function getPortfolioItemAndMorePortfolioItems(
+  slug: string,
+  preview: boolean
+): Promise<{
+  post: PortfolioItem | undefined;
+  morePosts: PortfolioItem[] | undefined;
+}> {
+  const entry = await fetchGraphQL<PortfolioItemCollectionResponse>(
     `query {
       portfolioItemCollection(where: { slug: "${slug}" }, preview: ${
       preview ? "true" : "false"
@@ -190,7 +209,7 @@ export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
     }`,
     preview
   );
-  const entries = await fetchGraphQL(
+  const entries = await fetchGraphQL<PortfolioItemCollectionResponse>(
     `query {
       portfolioItemCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
       preview ? "true" : "false"
@@ -203,7 +222,7 @@ export async function getPortfolioItemAndMorePortfolioItems(slug, preview) {
     preview
   );
   return {
-    post: extractPortfolioItem(entry),
-    morePosts: extractPortfolioItemEntries(entries),
+    post: entry.data?.portfolioItemCollection.items[0],
+    morePosts: entries.data?.portfolioItemCollection.items,
   };
 }

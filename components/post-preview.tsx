@@ -2,6 +2,7 @@ import Link from "next/link";
 import Avatar from "../components/avatar";
 import DateComponent from "../components/date";
 import BlogCoverImage from "./blog-cover-image";
+import type { Post } from "../lib/types";
 
 export default function PostPreview({
   title,
@@ -10,7 +11,7 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
-}) {
+}: Pick<Post, "title" | "coverImage" | "date" | "excerpt" | "author" | "slug">) {
   return (
     <div>
       <div className="mb-5">

@@ -2,8 +2,14 @@ import Avatar from "../components/avatar";
 import DateComponent from "../components/date";
 import BlogCoverImage from "./blog-cover-image";
 import PostTitle from "../components/post-title";
+import type { Post } from "../lib/types";
 
-export default function PostHeader({ title, coverImage, date, author }) {
+export default function PostHeader({
+  title,
+  coverImage,
+  date,
+  author,
+}: Pick<Post, "title" | "coverImage" | "date" | "author">) {
   return (
     <>
       <PostTitle>{title}</PostTitle>

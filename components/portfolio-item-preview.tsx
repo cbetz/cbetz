@@ -1,6 +1,7 @@
 import Link from "next/link";
 import DateComponent from "../components/date";
 import PortfolioCoverImage from "./portfolio-cover-image";
+import type { PortfolioItem } from "../lib/types";
 
 export default function PortfolioItemPreview({
   title,
@@ -10,7 +11,10 @@ export default function PortfolioItemPreview({
   tags,
   slug,
   link,
-}) {
+}: Pick<
+  PortfolioItem,
+  "title" | "coverImage" | "date" | "excerpt" | "tags" | "slug" | "link"
+>) {
   return (
     <div>
       <div className="mb-5">

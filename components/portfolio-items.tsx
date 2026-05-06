@@ -1,6 +1,7 @@
 import PortfolioItemPreview from "../components/portfolio-item-preview";
+import type { PortfolioItem } from "../lib/types";
 
-export default function PortfolioItems({ posts }) {
+export default function PortfolioItems({ posts }: { posts: PortfolioItem[] }) {
   return (
     <section>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">

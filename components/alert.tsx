@@ -2,7 +2,7 @@ import Container from "./container";
 import cn from "classnames";
 import Link from "next/link";
 
-export default function Alert({ preview }) {
+export default function Alert({ preview }: { preview?: boolean }) {
   return (
     <div
       className={cn("border-b", {
@@ -17,9 +17,9 @@ export default function Alert({ preview }) {
               This is page is a preview.{" "}
               <Link
                 href="/api/exit-preview">
-                
+
                   Click here
-                
+
               </Link>{" "}
               to exit preview mode.
             </>

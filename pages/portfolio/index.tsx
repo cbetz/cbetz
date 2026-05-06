@@ -4,8 +4,12 @@ import Layout from "../../components/layout";
 import { getAllPortfolioItems } from "../../lib/api";
 import Head from "next/head";
 import Header from "../../components/header";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function Index({ preview, allPortfolioItems }) {
+export default function Index({
+  preview,
+  allPortfolioItems,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Layout preview={preview}>
@@ -24,9 +28,9 @@ export default function Index({ preview, allPortfolioItems }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const allPortfolioItems = (await getAllPortfolioItems(preview)) ?? [];
   return {
     props: { preview, allPortfolioItems },
   };
-}
+};
