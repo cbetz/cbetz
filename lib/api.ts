@@ -3,6 +3,8 @@ slug
 title
 coverImage {
   url
+  width
+  height
 }
 date
 author {
@@ -22,6 +24,8 @@ slug
 title
 coverImage {
   url
+  width
+  height
 }
 date
 author {

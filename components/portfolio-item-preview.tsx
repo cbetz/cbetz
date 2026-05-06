@@ -14,7 +14,13 @@ export default function PortfolioItemPreview({
   return (
     <div>
       <div className="mb-5">
-        <PortfolioCoverImage title={title} slug={slug} url={coverImage.url} />
+        <PortfolioCoverImage
+          title={title}
+          slug={slug}
+          url={coverImage.url}
+          width={coverImage.width}
+          height={coverImage.height}
+        />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link
@@ -29,12 +35,14 @@ export default function PortfolioItemPreview({
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
       {link && (
         <p className="text-lg leading-relaxed mb-4">
-          {
-            // eslint-disable-next-line react/jsx-no-target-blank
-            <a className="hover:underline" href={link} target="_blank">
-              Learn More
-            </a>
-          }
+          <a
+            className="hover:underline"
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Learn More
+          </a>
         </p>
       )}
       {tags &&

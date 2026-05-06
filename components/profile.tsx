@@ -1,4 +1,8 @@
+import Image from "next/image";
 import { FiGithub, FiTwitter, FiYoutube, FiLinkedin } from "react-icons/fi";
+
+const PROFILE_IMAGE_URL =
+  "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png";
 
 export default function Profile() {
   return (
@@ -11,7 +15,7 @@ export default function Profile() {
           <div
             className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
             style={{
-              backgroundImage: `url('https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png')`,
+              backgroundImage: `url('${PROFILE_IMAGE_URL}')`,
             }}
           ></div>
 
@@ -68,9 +72,13 @@ export default function Profile() {
         </div>
       </div>
       <div className="w-full lg:w-2/5">
-        <img
-          src="https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png"
-          className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
+        <Image
+          src={PROFILE_IMAGE_URL}
+          alt="Chris Betz"
+          width={500}
+          height={500}
+          sizes="(min-width: 1024px) 40vw, 0px"
+          className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block w-full h-auto"
         />
       </div>
     </div>

@@ -1,12 +1,16 @@
 import cn from "classnames";
+import Image from "next/image";
 import Link from "next/link";
 
-export default function PortfolioCoverImage({ title, url, slug = null }) {
+export default function PortfolioCoverImage({ title, url, width, height, slug = null }) {
   const image = (
-    <img
+    <Image
       src={url}
       alt={`Cover Image for ${title}`}
-      className={cn("shadow-small", {
+      width={width}
+      height={height}
+      sizes="(min-width: 768px) 768px, 100vw"
+      className={cn("shadow-small w-full h-auto", {
         "hover:shadow-medium transition-shadow duration-200": slug,
       })}
     />
