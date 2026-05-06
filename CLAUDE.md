@@ -6,8 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `yarn dev` — start the Next.js dev server
 - `yarn build` / `yarn start` — production build / serve
+- `yarn lint` — run ESLint (flat config in `eslint.config.mjs`, extends `eslint-config-next/core-web-vitals`)
+- `yarn typecheck` — run `tsc --noEmit`
 
-There is no test suite and no lint script — `eslint-config-next` is installed but only runs implicitly via `next build`.
+There is no test suite. Note that as of Next 15+, `next build` no longer runs ESLint — use `yarn lint` separately.
 
 If a Contentful space ever needs to be re-bootstrapped from `contentful/export.json` (one-time operation), do not add `contentful-import` back to the project — run it transiently via `npx -y contentful-import@latest --content-file contentful/export.json --space-id $CONTENTFUL_SPACE_ID --management-token $CONTENTFUL_MANAGEMENT_TOKEN`. It was removed as a devDependency because it carried a large transitive vulnerability tree for a one-shot setup tool.
 
