@@ -1,5 +1,5 @@
 import Container from "./container";
-import cn from "classnames";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Alert({ preview }: { preview?: boolean }) {

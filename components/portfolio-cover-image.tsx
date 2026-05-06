@@ -1,7 +1,7 @@
-import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import type { ContentfulAsset } from "../lib/types";
+import { cn } from "@/lib/utils";
+import type { ContentfulAsset } from "@/lib/types";
 
 type Props = ContentfulAsset & {
   title: string;

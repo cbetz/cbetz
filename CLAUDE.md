@@ -25,7 +25,7 @@ Personal site: Next.js **Pages Router** (not App Router) + TypeScript + Tailwind
 
 **Preview mode.** `pages/api/preview.ts` validates `?secret=…&slug=…` against `CONTENTFUL_PREVIEW_SECRET`, confirms the slug exists in Contentful, then calls `res.setPreviewData({})` and emits an HTML meta-refresh redirect rather than a 307 — this is intentional to avoid open-redirect vulnerabilities (see comment in the file). `pages/api/exit-preview.ts` clears it.
 
-**Styling.** Tailwind 3 with a small custom theme in `tailwind.config.js` (custom screens, `accent-1/2/7` colors, oversized `5xl–8xl` font sizes used by hero headings). The `content` glob includes `./app/**` even though the App Router is not in use. Global styles in `styles/index.css`; one CSS module at `components/markdown-styles.module.css` for rendered post bodies.
+**Styling.** Tailwind 4 with CSS-first config — design tokens live in a `@theme {}` block in `styles/index.css` (no `tailwind.config.js`). shadcn/ui (Radix primitives, Nova preset, neutral base) is set up: components go in `components/ui/`, `cn()` helper in `lib/utils.ts`, theme CSS variables (light + dark) defined in `styles/index.css`. Path aliases: `@/*` maps to project root. One CSS module at `components/markdown-styles.module.css` for rendered post bodies — needs `@reference "../styles/index.css"` at the top to use `@apply` (Tailwind 4 requirement for CSS modules).
 
 **Rich text.** Post/portfolio bodies are Contentful rich-text JSON rendered through `@contentful/rich-text-react-renderer` inside `components/post-body.tsx`.
 
