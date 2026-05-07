@@ -4,11 +4,34 @@ import { draftMode } from "next/headers";
 import Container from "@/components/container";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
+import JsonLd from "@/components/json-ld";
 import PortfolioGrid from "@/components/portfolio-grid";
 import RecentPosts from "@/components/recent-posts";
 import { Separator } from "@/components/ui/separator";
 import { getAllPortfolioItems, getAllPostsForHome } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Chris Betz",
+  url: SITE_URL,
+  jobTitle: "Head of Engineering",
+  worksFor: {
+    "@type": "Organization",
+    name: "Altitude",
+    url: "https://joinaltitude.com",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/christopherbetz",
+    "https://twitter.com/thechrisbetz",
+    "https://github.com/cbetz",
+    "https://www.youtube.com/c/ChrisBetz",
+  ],
+};
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
@@ -21,6 +44,7 @@ export default async function Home() {
 
   return (
     <Container>
+      <JsonLd data={personSchema} />
       <Header />
       <Hero />
       <Section title="Selected work">

@@ -6,9 +6,13 @@ import PostBody from "@/components/post-body";
 import MoreItems from "@/components/more-items";
 import Header from "@/components/header";
 import ArticleHeader from "@/components/article-header";
+import JsonLd from "@/components/json-ld";
 import { Separator } from "@/components/ui/separator";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
 
 type Params = Promise<{ slug: string }>;
 
@@ -54,8 +58,30 @@ export default async function Post({ params }: { params: Params }) {
   if (!rawPost) notFound();
   const post = await withBlur(rawPost);
 
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage.url,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Chris Betz",
+      url: SITE_URL,
+    },
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+  };
+
   return (
     <Container>
+      <JsonLd data={blogPostingSchema} />
       <Header />
       <article className="max-w-2xl mx-auto">
         <ArticleHeader
