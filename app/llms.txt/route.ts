@@ -35,6 +35,8 @@ export async function GET() {
     "",
     "Personal site of Chris Betz (also known as Christopher Betz). Currently Head of Engineering at [Altitude](https://joinaltitude.com), where I build real-world AI systems for healthcare. Based in New York. This site is a portfolio of selected work and a blog.",
     "",
+    "Every blog post and portfolio item has a clean markdown variant at `<page-url>/raw.md` (e.g. `/blog/foo/raw.md`). The HTML version also advertises this via `<link rel=\"alternate\" type=\"text/markdown\">`.",
+    "",
     "## Pages",
     "",
     `- [Home](${SITE_URL}/): Hero, selected work, and recent writing`,
