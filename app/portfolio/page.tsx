@@ -4,6 +4,7 @@ import Container from "@/components/container";
 import Header from "@/components/header";
 import PortfolioGrid from "@/components/portfolio-grid";
 import { getAllPortfolioItems } from "@/lib/api";
+import { withBlur } from "@/lib/blur";
 
 export const metadata: Metadata = {
   title: "Portfolio | Chris Betz",
@@ -11,7 +12,10 @@ export const metadata: Metadata = {
 
 export default async function PortfolioIndex() {
   const { isEnabled: preview } = await draftMode();
-  const allPortfolioItems = (await getAllPortfolioItems(preview)) ?? [];
+  const rawPortfolioItems = (await getAllPortfolioItems(preview)) ?? [];
+  const allPortfolioItems = await Promise.all(
+    rawPortfolioItems.map(withBlur)
+  );
 
   return (
     <Container>

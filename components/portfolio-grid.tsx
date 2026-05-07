@@ -31,6 +31,10 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
           width={item.coverImage.width}
           height={item.coverImage.height}
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          {...(item.coverImage.blurDataURL && {
+            placeholder: "blur" as const,
+            blurDataURL: item.coverImage.blurDataURL,
+          })}
           className="aspect-[4/3] w-full object-cover"
         />
         <CardHeader className="pt-3">

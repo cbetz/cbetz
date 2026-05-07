@@ -73,6 +73,10 @@ export default function ArticleHeader({
         width={coverImage.width}
         height={coverImage.height}
         sizes="(min-width: 768px) 768px, 100vw"
+        {...(coverImage.blurDataURL && {
+          placeholder: "blur" as const,
+          blurDataURL: coverImage.blurDataURL,
+        })}
         className="w-full h-auto rounded-xl ring-1 ring-foreground/10"
         priority
       />

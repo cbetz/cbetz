@@ -8,13 +8,15 @@ import PortfolioGrid from "@/components/portfolio-grid";
 import RecentPosts from "@/components/recent-posts";
 import { Separator } from "@/components/ui/separator";
 import { getAllPortfolioItems, getAllPostsForHome } from "@/lib/api";
+import { withBlur } from "@/lib/blur";
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const [allPosts, allPortfolioItems] = await Promise.all([
+  const [allPosts, rawPortfolioItems] = await Promise.all([
     getAllPostsForHome(preview).then((p) => p ?? []),
     getAllPortfolioItems(preview).then((p) => p ?? []),
   ]);
+  const allPortfolioItems = await Promise.all(rawPortfolioItems.map(withBlur));
   const recentPosts = allPosts.slice(0, 3);
 
   return (

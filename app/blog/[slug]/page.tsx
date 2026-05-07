@@ -8,6 +8,7 @@ import Header from "@/components/header";
 import ArticleHeader from "@/components/article-header";
 import { Separator } from "@/components/ui/separator";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
+import { withBlur } from "@/lib/blur";
 
 type Params = Promise<{ slug: string }>;
 
@@ -34,9 +35,10 @@ export async function generateMetadata({
 export default async function Post({ params }: { params: Params }) {
   const { slug } = await params;
   const { isEnabled: preview } = await draftMode();
-  const { post, morePosts } = await getPostAndMorePosts(slug, preview);
+  const { post: rawPost, morePosts } = await getPostAndMorePosts(slug, preview);
 
-  if (!post) notFound();
+  if (!rawPost) notFound();
+  const post = await withBlur(rawPost);
 
   return (
     <Container>

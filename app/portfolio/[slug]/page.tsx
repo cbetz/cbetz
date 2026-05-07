@@ -11,6 +11,7 @@ import {
   getAllPortfolioItemsWithSlug,
   getPortfolioItemAndMorePortfolioItems,
 } from "@/lib/api";
+import { withBlur } from "@/lib/blur";
 
 type Params = Promise<{ slug: string }>;
 
@@ -41,12 +42,11 @@ export default async function PortfolioItemPage({
 }) {
   const { slug } = await params;
   const { isEnabled: preview } = await draftMode();
-  const { post, morePosts } = await getPortfolioItemAndMorePortfolioItems(
-    slug,
-    preview
-  );
+  const { post: rawPost, morePosts } =
+    await getPortfolioItemAndMorePortfolioItems(slug, preview);
 
-  if (!post) notFound();
+  if (!rawPost) notFound();
+  const post = await withBlur(rawPost);
 
   return (
     <Container>
