@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import Container from "@/components/container";
-import PortfolioItems from "@/components/portfolio-items";
 import Header from "@/components/header";
+import PortfolioGrid from "@/components/portfolio-grid";
 import { getAllPortfolioItems } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Chris Betz's Portfolio",
+  title: "Portfolio | Chris Betz",
 };
 
 export default async function PortfolioIndex() {
@@ -16,10 +16,10 @@ export default async function PortfolioIndex() {
   return (
     <Container>
       <Header />
-      <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
-        Portfolio
-      </h2>
-      <PortfolioItems posts={allPortfolioItems} />
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-12">
+        Selected work
+      </h1>
+      <PortfolioGrid items={allPortfolioItems} />
     </Container>
   );
 }
