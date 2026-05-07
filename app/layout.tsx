@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { draftMode } from "next/headers";
 import Alert from "@/components/alert";
+import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/index.css";
 
 const geist = Geist({
@@ -46,13 +47,20 @@ export default async function RootLayout({
 }) {
   const { isEnabled: preview } = await draftMode();
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en" className={geist.variable} suppressHydrationWarning>
       <body>
-        <div className="min-h-screen">
-          <main>{children}</main>
-        </div>
-        <Alert preview={preview} />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen">
+            <main>{children}</main>
+          </div>
+          <Alert preview={preview} />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

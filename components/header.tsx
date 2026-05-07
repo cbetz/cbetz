@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Header() {
   return (
@@ -10,11 +11,11 @@ export default function Header() {
         cbetz.com
       </Link>
       <nav>
-        <ul className="flex items-center gap-6 text-sm">
+        <ul className="flex items-center gap-2 md:gap-6 text-sm">
           <li>
             <Link
               href="/portfolio"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors px-2 md:px-0"
             >
               Portfolio
             </Link>
@@ -22,10 +23,13 @@ export default function Header() {
           <li>
             <Link
               href="/blog"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors px-2 md:px-0"
             >
               Blog
             </Link>
+          </li>
+          <li>
+            <ThemeToggle />
           </li>
         </ul>
       </nav>

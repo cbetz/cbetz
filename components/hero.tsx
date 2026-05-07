@@ -14,7 +14,7 @@ const socialLinks = [
 
 export default function Hero() {
   return (
-    <section className="flex flex-col-reverse items-start gap-10 py-16 md:py-24 md:flex-row md:items-center md:gap-16">
+    <section className="flex flex-col-reverse items-start gap-10 pb-16 md:pb-24 md:flex-row md:items-center md:gap-16">
       <div className="flex-1 space-y-6">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05]">
           Chris Betz

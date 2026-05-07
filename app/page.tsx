@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { draftMode } from "next/headers";
 import Container from "@/components/container";
+import Header from "@/components/header";
 import Hero from "@/components/hero";
 import PortfolioGrid from "@/components/portfolio-grid";
 import RecentPosts from "@/components/recent-posts";
@@ -18,6 +19,7 @@ export default async function Home() {
 
   return (
     <Container>
+      <Header />
       <Hero />
       <Section title="Selected work">
         <PortfolioGrid items={allPortfolioItems} />
