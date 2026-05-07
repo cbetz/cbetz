@@ -40,6 +40,7 @@ export async function GET() {
     "## Pages",
     "",
     `- [Home](${SITE_URL}/): Hero, selected work, and recent writing`,
+    `- [About](${SITE_URL}/about): Bio, role, and contact`,
     `- [Portfolio](${SITE_URL}/portfolio): Selected work`,
     `- [Writing](${SITE_URL}/blog): Notes, essays, and posts`,
     "",

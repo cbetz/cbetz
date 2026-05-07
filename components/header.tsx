@@ -29,6 +29,14 @@ export default function Header() {
             </Link>
           </li>
           <li>
+            <Link
+              href="/about"
+              className="text-muted-foreground hover:text-foreground transition-colors px-2 md:px-0"
+            >
+              About
+            </Link>
+          </li>
+          <li>
             <ThemeToggle />
           </li>
         </ul>
