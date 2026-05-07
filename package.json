@@ -35,5 +35,8 @@
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
 }
