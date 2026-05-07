@@ -20,14 +20,14 @@ export default function Hero() {
           Chris Betz
         </h1>
         <p className="text-xl md:text-2xl text-muted-foreground leading-snug max-w-xl">
-          CTO at{" "}
+          Head of Engineering at{" "}
           <Link
-            href="https://www.aptihealth.com/"
+            href="https://joinaltitude.com"
             target="_blank"
             rel="noreferrer"
             className="text-foreground underline underline-offset-4 decoration-2 hover:decoration-primary"
           >
-            aptihealth
+            Altitude
           </Link>
           . Building software that ships.
         </p>
