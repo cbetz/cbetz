@@ -79,9 +79,30 @@ export default async function Post({ params }: { params: Params }) {
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Writing",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <Container>
       <JsonLd data={blogPostingSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Header />
       <article className="max-w-2xl mx-auto">
         <ArticleHeader

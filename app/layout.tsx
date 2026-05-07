@@ -3,8 +3,27 @@ import { Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { draftMode } from "next/headers";
 import Alert from "@/components/alert";
+import JsonLd from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/index.css";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Chris Betz",
+  url: SITE_URL,
+  description:
+    "Personal site of Chris Betz — Head of Engineering at Altitude, building real-world AI systems for healthcare.",
+  inLanguage: "en-US",
+  author: {
+    "@type": "Person",
+    name: "Chris Betz",
+    url: SITE_URL,
+  },
+};
 
 const geist = Geist({
   variable: "--font-sans",
@@ -16,11 +35,11 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com"
   ),
   title: {
-    default: "Chris Betz",
-    template: "%s | cbetz.com",
+    default: "Chris Betz – Head of Engineering at Altitude",
+    template: "%s | Chris Betz",
   },
   description:
-    "Chris Betz — Head of Engineering at Altitude. Building real-world AI systems for healthcare.",
+    "Chris Betz is Head of Engineering at Altitude, building real-world AI systems for healthcare. Writing, portfolio, and contact.",
   authors: [{ name: "Chris Betz", url: "https://cbetz.com" }],
   creator: "Chris Betz",
   icons: {
@@ -65,7 +84,14 @@ export default async function RootLayout({
   const { isEnabled: preview } = await draftMode();
   return (
     <html lang="en" className={geist.variable} suppressHydrationWarning>
+      <head>
+        <link rel="me" href="https://www.linkedin.com/in/christopherbetz" />
+        <link rel="me" href="https://github.com/cbetz" />
+        <link rel="me" href="https://twitter.com/thechrisbetz" />
+        <link rel="me" href="https://www.youtube.com/c/ChrisBetz" />
+      </head>
       <body>
+        <JsonLd data={websiteSchema} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

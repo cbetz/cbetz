@@ -81,9 +81,30 @@ export default async function PortfolioItemPage({
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Portfolio",
+        item: `${SITE_URL}/portfolio`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}/portfolio/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <Container>
       <JsonLd data={creativeWorkSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <Header />
       <article className="max-w-2xl mx-auto">
         <ArticleHeader
