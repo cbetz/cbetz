@@ -29,7 +29,7 @@ export default function Hero() {
           >
             Altitude
           </Link>
-          . Building software that ships.
+          .
         </p>
         <ul className="flex items-center gap-5">
           {socialLinks.map(({ href, label, icon: Icon }) => (
