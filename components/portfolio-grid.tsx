@@ -35,7 +35,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
             placeholder: "blur" as const,
             blurDataURL: item.coverImage.blurDataURL,
           })}
-          className="aspect-[4/3] w-full object-cover"
+          className="aspect-[4/3] w-full object-contain bg-muted/40"
         />
         <CardHeader className="pt-3">
           <CardTitle className="flex items-start justify-between gap-2 text-lg leading-tight">
