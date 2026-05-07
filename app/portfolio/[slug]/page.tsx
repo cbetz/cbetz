@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import Container from "@/components/container";
 import PostBody from "@/components/post-body";
-import MoreStories from "@/components/more-stories";
+import MoreItems from "@/components/more-items";
 import Header from "@/components/header";
-import PostHeader from "@/components/post-header";
-import SectionSeparator from "@/components/section-separator";
+import ArticleHeader from "@/components/article-header";
+import { Separator } from "@/components/ui/separator";
 import {
   getAllPortfolioItemsWithSlug,
   getPortfolioItemAndMorePortfolioItems,
@@ -51,17 +51,26 @@ export default async function PortfolioItemPage({
   return (
     <Container>
       <Header />
-      <article>
-        <PostHeader
+      <article className="max-w-2xl mx-auto">
+        <ArticleHeader
+          backHref="/portfolio"
+          backLabel="All work"
           title={post.title}
-          coverImage={post.coverImage}
           date={post.date}
-          author={post.author}
+          coverImage={post.coverImage}
+          tags={post.tags}
+          externalLink={post.link}
         />
         <PostBody content={post.content} />
       </article>
-      <SectionSeparator />
-      {morePosts && morePosts.length > 0 && <MoreStories posts={morePosts} />}
+      <Separator className="my-20 max-w-2xl mx-auto" />
+      <div className="max-w-2xl mx-auto">
+        <MoreItems
+          title="More work"
+          items={morePosts ?? []}
+          hrefPrefix="/portfolio"
+        />
+      </div>
     </Container>
   );
 }
