@@ -27,8 +27,22 @@ export async function generateMetadata({
   const { post } = await getPostAndMorePosts(slug, preview);
   if (!post) return {};
   return {
-    title: `${post.title} | cbetz.com`,
-    openGraph: { images: [post.coverImage.url] },
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      publishedTime: post.date,
+      authors: [post.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 

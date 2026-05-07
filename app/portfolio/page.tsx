@@ -7,7 +7,9 @@ import { getAllPortfolioItems } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
 
 export const metadata: Metadata = {
-  title: "Portfolio | Chris Betz",
+  title: "Portfolio",
+  description: "Selected work by Chris Betz.",
+  alternates: { canonical: "/portfolio" },
 };
 
 export default async function PortfolioIndex() {

@@ -6,7 +6,9 @@ import RecentPosts from "@/components/recent-posts";
 import { getAllPostsForHome } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Blog | Chris Betz",
+  title: "Writing",
+  description: "Notes, essays, and posts by Chris Betz.",
+  alternates: { canonical: "/blog" },
 };
 
 export default async function BlogIndex() {

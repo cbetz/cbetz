@@ -30,8 +30,21 @@ export async function generateMetadata({
   const { post } = await getPortfolioItemAndMorePortfolioItems(slug, preview);
   if (!post) return {};
   return {
-    title: `${post.title} | cbetz.com`,
-    openGraph: { images: [post.coverImage.url] },
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/portfolio/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `/portfolio/${post.slug}`,
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 

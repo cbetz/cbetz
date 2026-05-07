@@ -15,8 +15,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com"
   ),
-  title: "Chris Betz",
-  description: "Chris Betz's Personal Website",
+  title: {
+    default: "Chris Betz",
+    template: "%s | cbetz.com",
+  },
+  description:
+    "Chris Betz — Head of Engineering at Altitude. Building real-world AI systems for healthcare.",
+  authors: [{ name: "Chris Betz", url: "https://cbetz.com" }],
+  creator: "Chris Betz",
   icons: {
     apple: "/favicon/apple-touch-icon.png",
     icon: [
@@ -30,9 +36,20 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   alternates: {
+    canonical: "/",
     types: {
       "application/rss+xml": "/feed.xml",
     },
+  },
+  openGraph: {
+    type: "website",
+    siteName: "cbetz.com",
+    url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@thechrisbetz",
   },
 };
 
