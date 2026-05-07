@@ -29,7 +29,7 @@ export default function Hero() {
           >
             Altitude
           </Link>
-          .
+          . Building real-world AI systems for healthcare.
         </p>
         <ul className="flex items-center gap-5">
           {socialLinks.map(({ href, label, icon: Icon }) => (
