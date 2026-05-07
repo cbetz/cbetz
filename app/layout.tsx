@@ -33,9 +33,6 @@ export const metadata: Metadata = {
       "application/rss+xml": "/feed.xml",
     },
   },
-  openGraph: {
-    images: ["/og-image.jpg"],
-  },
 };
 
 export const viewport: Viewport = {
