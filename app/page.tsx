@@ -14,33 +14,39 @@ import { withBlur } from "@/lib/blur";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
 
-const personSchema = {
+const profilePageSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Chris Betz",
-  alternateName: "Christopher Betz",
-  url: SITE_URL,
-  description:
-    "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
-  image:
-    "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png",
-  jobTitle: "Head of Engineering",
-  worksFor: {
-    "@type": "Organization",
-    name: "Altitude",
-    url: "https://joinaltitude.com",
+  "@type": "ProfilePage",
+  dateCreated: "2020-01-01T00:00:00Z",
+  dateModified: new Date().toISOString(),
+  mainEntity: {
+    "@type": "Person",
+    name: "Chris Betz",
+    alternateName: "Christopher Betz",
+    identifier: "chrisbetz",
+    url: SITE_URL,
+    description:
+      "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
+    image:
+      "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png",
+    jobTitle: "Head of Engineering",
+    worksFor: {
+      "@type": "Organization",
+      name: "Altitude",
+      url: "https://joinaltitude.com",
+    },
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Lehigh University",
+      url: "https://www.lehigh.edu",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/christopherbetz",
+      "https://twitter.com/thechrisbetz",
+      "https://github.com/cbetz",
+      "https://www.youtube.com/c/ChrisBetz",
+    ],
   },
-  alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "Lehigh University",
-    url: "https://www.lehigh.edu",
-  },
-  sameAs: [
-    "https://www.linkedin.com/in/christopherbetz",
-    "https://twitter.com/thechrisbetz",
-    "https://github.com/cbetz",
-    "https://www.youtube.com/c/ChrisBetz",
-  ],
 };
 
 export default async function Home() {
@@ -54,7 +60,7 @@ export default async function Home() {
 
   return (
     <Container>
-      <JsonLd data={personSchema} />
+      <JsonLd data={profilePageSchema} />
       <Header />
       <Hero />
       <Section title="Selected work">

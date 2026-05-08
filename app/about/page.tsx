@@ -19,38 +19,44 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-const personSchema = {
+const profilePageSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Chris Betz",
-  alternateName: "Christopher Betz",
-  url: `${SITE_URL}/about`,
-  description:
-    "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
-  image: PROFILE_IMAGE_URL,
-  jobTitle: "Head of Engineering",
-  worksFor: {
-    "@type": "Organization",
-    name: "Altitude",
-    url: "https://joinaltitude.com",
+  "@type": "ProfilePage",
+  dateCreated: "2020-01-01T00:00:00Z",
+  dateModified: new Date().toISOString(),
+  mainEntity: {
+    "@type": "Person",
+    name: "Chris Betz",
+    alternateName: "Christopher Betz",
+    identifier: "chrisbetz",
+    url: `${SITE_URL}/about`,
+    description:
+      "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
+    image: PROFILE_IMAGE_URL,
+    jobTitle: "Head of Engineering",
+    worksFor: {
+      "@type": "Organization",
+      name: "Altitude",
+      url: "https://joinaltitude.com",
+    },
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Lehigh University",
+      url: "https://www.lehigh.edu",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "New York",
+      addressRegion: "NY",
+      addressCountry: "US",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/christopherbetz",
+      "https://twitter.com/thechrisbetz",
+      "https://github.com/cbetz",
+      "https://www.youtube.com/c/ChrisBetz",
+    ],
   },
-  alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "Lehigh University",
-    url: "https://www.lehigh.edu",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "New York",
-    addressRegion: "NY",
-    addressCountry: "US",
-  },
-  sameAs: [
-    "https://www.linkedin.com/in/christopherbetz",
-    "https://twitter.com/thechrisbetz",
-    "https://github.com/cbetz",
-    "https://www.youtube.com/c/ChrisBetz",
-  ],
 };
 
 const socialLinks = [
@@ -63,7 +69,7 @@ const socialLinks = [
 export default function AboutPage() {
   return (
     <Container>
-      <JsonLd data={personSchema} />
+      <JsonLd data={profilePageSchema} />
       <Header />
       <article className="max-w-2xl mx-auto pb-24">
         <div className="flex items-center gap-6 mb-10">
