@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { draftMode } from "next/headers";
 import Alert from "@/components/alert";
 import JsonLd from "@/components/json-ld";
@@ -103,6 +104,7 @@ export default async function RootLayout({
           </div>
           <Alert preview={preview} />
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

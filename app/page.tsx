@@ -40,6 +40,14 @@ const profilePageSchema = {
       name: "Lehigh University",
       url: "https://www.lehigh.edu",
     },
+    knowsAbout: [
+      "Software engineering",
+      "Engineering management",
+      "Artificial intelligence",
+      "Healthcare technology",
+      "Applied AI",
+      "Product engineering",
+    ],
     sameAs: [
       "https://www.linkedin.com/in/christopherbetz",
       "https://twitter.com/thechrisbetz",
