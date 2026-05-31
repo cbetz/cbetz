@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
 
 // AI/LLM crawlers, explicitly welcomed. Same access as everyone
 // else, but listing them makes the intent unambiguous (some sites

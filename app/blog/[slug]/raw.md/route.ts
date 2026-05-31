@@ -3,7 +3,7 @@ import { getPostAndMorePosts } from "@/lib/api";
 import { richTextToMarkdown } from "@/lib/markdown";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
 
 type Params = Promise<{ slug: string }>;
 

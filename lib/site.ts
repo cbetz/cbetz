@@ -2,7 +2,7 @@ import { FiGithub, FiLinkedin, FiTwitter, FiYoutube } from "react-icons/fi";
 import type { IconType } from "react-icons";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
 
 export const PROFILE_IMAGE_URL =
   "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png";

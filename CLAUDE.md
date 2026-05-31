@@ -13,7 +13,7 @@ There is no test suite. As of Next 15+, `next build` no longer runs ESLint — u
 
 If a Contentful space ever needs to be re-bootstrapped from `contentful/export.json` (one-time operation), do not add `contentful-import` back to the project — run it transiently via `npx -y contentful-import@latest --content-file contentful/export.json --space-id $CONTENTFUL_SPACE_ID --management-token $CONTENTFUL_MANAGEMENT_TOKEN`. It was removed as a devDependency because it carried a large transitive vulnerability tree for a one-shot setup tool.
 
-Required env vars (see `.env.local.example`): `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`, `CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `CONTENTFUL_PREVIEW_SECRET`. Optionally `NEXT_PUBLIC_SITE_URL` to set the canonical origin used by `metadataBase` (defaults to `https://cbetz.com`).
+Required env vars (see `.env.local.example`): `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN`, `CONTENTFUL_PREVIEW_ACCESS_TOKEN`, `CONTENTFUL_PREVIEW_SECRET`. `NEXT_PUBLIC_SITE_URL` sets the canonical origin used by `metadataBase`, the sitemap, `robots.txt`, RSS, llms.txt, and JSON-LD. The production canonical host is **www** (`https://www.cbetz.com`) — the apex `cbetz.com` 308-redirects to www, so every emitted URL must be www to avoid sitemap/canonical redirect mismatches. Code falls back to `https://www.cbetz.com` if the env var is unset.
 
 ## Architecture
 

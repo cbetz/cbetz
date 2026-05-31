@@ -5,7 +5,7 @@ import {
 } from "@/lib/api";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, items] = await Promise.all([
