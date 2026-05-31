@@ -19,14 +19,13 @@ export default function OpengraphImage() {
           color: "#0a0a0a",
         }}
       >
-        <div
-          style={{
-            fontSize: 28,
-            color: "#737373",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          cbetz.com
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div
+            style={{ width: 16, height: 16, borderRadius: 5, background: "#2f8aa0" }}
+          />
+          <div style={{ fontSize: 28, color: "#737373", letterSpacing: "-0.01em" }}>
+            cbetz.com
+          </div>
         </div>
         <div
           style={{

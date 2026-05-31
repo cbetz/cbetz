@@ -1,60 +1,62 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FiGithub, FiLinkedin, FiTwitter, FiYoutube } from "react-icons/fi";
-
-const PROFILE_IMAGE_URL =
-  "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png";
-
-const socialLinks = [
-  { href: "https://www.linkedin.com/in/christopherbetz", label: "LinkedIn", icon: FiLinkedin },
-  { href: "https://twitter.com/thechrisbetz", label: "Twitter", icon: FiTwitter },
-  { href: "https://github.com/cbetz", label: "GitHub", icon: FiGithub },
-  { href: "https://www.youtube.com/c/ChrisBetz", label: "YouTube", icon: FiYoutube },
-];
+import { Button } from "@/components/ui/button";
+import { ALTITUDE_URL, PROFILE_IMAGE_URL, SOCIAL_LINKS } from "@/lib/site";
 
 export default function Hero() {
   return (
-    <section className="flex flex-col-reverse items-start gap-10 pb-16 md:pb-24 md:flex-row md:items-center md:gap-16">
-      <div className="flex-1 space-y-6">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.05]">
+    <section className="flex flex-col-reverse items-start gap-8 pt-4 md:flex-row md:items-center md:justify-between md:gap-12 md:pt-8">
+      <div className="flex-1 space-y-5">
+        <h1 className="animate-in fade-in slide-in-from-bottom-2 font-serif text-4xl font-semibold leading-[1.05] tracking-tight duration-500 md:text-[3rem]">
           Chris Betz
         </h1>
-        <p className="text-xl md:text-2xl text-muted-foreground leading-snug max-w-xl">
-          Head of Engineering at{" "}
-          <Link
-            href="https://joinaltitude.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-foreground underline underline-offset-4 decoration-2 hover:decoration-primary"
-          >
-            Altitude
-          </Link>
-          . Building real-world AI systems for healthcare.
-        </p>
-        <ul className="flex items-center gap-5">
-          {socialLinks.map(({ href, label, icon: Icon }) => (
-            <li key={label}>
-              <Link
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Icon className="size-6" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="animate-in fade-in slide-in-from-bottom-2 space-y-2 delay-100 duration-500">
+          <p className="text-lg leading-snug md:text-xl">
+            Head of Engineering at{" "}
+            <Link
+              href={ALTITUDE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="u-link font-medium"
+            >
+              Altitude
+            </Link>
+            , building real-world AI for healthcare.
+          </p>
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Two decades turning hard, regulated problems into software that
+            ships — across web, mobile, and applied AI.
+          </p>
+        </div>
+        <div className="animate-in fade-in slide-in-from-bottom-2 flex flex-wrap items-center gap-5 pt-1 delay-200 duration-500">
+          <Button asChild className="h-10 px-5">
+            <Link href="/#contact">Get in touch</Link>
+          </Button>
+          <ul className="flex items-center gap-4">
+            {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer me"
+                  aria-label={label}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <Icon className="size-5" aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="shrink-0">
+      <div className="animate-in fade-in zoom-in-95 shrink-0 duration-700">
         <Image
           src={PROFILE_IMAGE_URL}
           alt="Chris Betz"
           width={240}
           height={240}
           priority
-          className="rounded-full size-40 md:size-60 object-cover ring-1 ring-foreground/10"
+          className="size-32 rounded-full object-cover ring-1 ring-hairline md:size-44"
         />
       </div>
     </section>

@@ -1,105 +1,65 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { FiGithub, FiLinkedin, FiTwitter, FiYoutube } from "react-icons/fi";
 import Container from "@/components/container";
-import Header from "@/components/header";
+import ContactEmail from "@/components/contact-email";
+import ExperienceTimeline from "@/components/experience-timeline";
 import JsonLd from "@/components/json-ld";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
-
-const PROFILE_IMAGE_URL =
-  "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png";
+import { profilePageSchema } from "@/lib/schema";
+import { ALTITUDE_URL, PROFILE_IMAGE_URL, SOCIAL_LINKS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Chris Betz — Head of Engineering at Altitude. Building real-world AI systems for healthcare. Based in New York.",
+    "Chris Betz — Head of Engineering at Altitude. Two decades building healthcare software, twice a CTO. Based in the Philadelphia area.",
   alternates: { canonical: "/about" },
 };
 
-const profilePageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  dateCreated: "2020-01-01T00:00:00Z",
-  dateModified: new Date().toISOString(),
-  mainEntity: {
-    "@type": "Person",
-    name: "Chris Betz",
-    alternateName: "Christopher Betz",
-    identifier: "chrisbetz",
-    url: `${SITE_URL}/about`,
-    description:
-      "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
-    image: PROFILE_IMAGE_URL,
-    jobTitle: "Head of Engineering",
-    worksFor: {
-      "@type": "Organization",
-      name: "Altitude",
-      url: "https://joinaltitude.com",
-    },
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "Lehigh University",
-      url: "https://www.lehigh.edu",
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "New York",
-      addressRegion: "NY",
-      addressCountry: "US",
-    },
-    knowsAbout: [
-      "Software engineering",
-      "Engineering management",
-      "Artificial intelligence",
-      "Healthcare technology",
-      "Applied AI",
-      "Product engineering",
-    ],
-    sameAs: [
-      "https://www.linkedin.com/in/christopherbetz",
-      "https://twitter.com/thechrisbetz",
-      "https://github.com/cbetz",
-      "https://www.youtube.com/c/ChrisBetz",
-    ],
+const QA = [
+  {
+    q: "Who is Chris Betz?",
+    a: "Chris Betz (also known as Christopher Betz) is a software engineer and engineering leader with two decades in healthcare technology, currently Head of Engineering at Altitude.",
   },
-};
-
-const socialLinks = [
-  { href: "https://www.linkedin.com/in/christopherbetz", label: "LinkedIn", icon: FiLinkedin },
-  { href: "https://twitter.com/thechrisbetz", label: "Twitter", icon: FiTwitter },
-  { href: "https://github.com/cbetz", label: "GitHub", icon: FiGithub },
-  { href: "https://www.youtube.com/c/ChrisBetz", label: "YouTube", icon: FiYoutube },
+  {
+    q: "What does Chris Betz do?",
+    a: "He leads engineering, data, security, and applied-AI strategy at Altitude, building production AI systems for healthcare. Before Altitude he was CTO of aptihealth and of New Ocean Health.",
+  },
+  {
+    q: "Where is Chris Betz based?",
+    a: "The Philadelphia area — Media, Pennsylvania — working remotely.",
+  },
+  {
+    q: "Where did Chris Betz study?",
+    a: "Lehigh University, where he earned a B.S. in Computer Engineering.",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <Container>
-      <JsonLd data={profilePageSchema} />
-      <Header />
-      <article className="max-w-2xl mx-auto pb-24">
-        <div className="flex items-center gap-6 mb-10">
+      <JsonLd data={profilePageSchema("/about")} />
+      <div className="pt-4 md:pt-8">
+        <div className="flex items-center gap-5">
           <Image
             src={PROFILE_IMAGE_URL}
             alt="Chris Betz"
             width={120}
             height={120}
-            className="rounded-full size-24 md:size-28 object-cover ring-1 ring-foreground/10 shrink-0"
             priority
+            className="size-20 shrink-0 rounded-full object-cover ring-1 ring-hairline md:size-24"
           />
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+            <p className="eyebrow mb-1">About</p>
+            <h1 className="font-serif text-3xl font-semibold tracking-tight md:text-4xl">
               Chris Betz
             </h1>
-            <p className="text-muted-foreground mt-1">
+            <p className="mt-1 text-muted-foreground">
               Head of Engineering at{" "}
               <Link
-                href="https://joinaltitude.com"
+                href={ALTITUDE_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="text-foreground underline underline-offset-4 hover:decoration-primary"
+                className="u-link text-foreground"
               >
                 Altitude
               </Link>
@@ -107,67 +67,93 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-5 text-base md:text-lg leading-relaxed">
+        <div className="mt-10 space-y-5 text-base leading-relaxed md:text-lg">
           <p>
-            I&apos;m Chris Betz (also known as Christopher Betz). I lead engineering at{" "}
+            I&apos;m Chris Betz. I lead engineering at{" "}
             <Link
-              href="https://joinaltitude.com"
+              href={ALTITUDE_URL}
               target="_blank"
               rel="noreferrer"
-              className="underline underline-offset-4"
+              className="u-link"
             >
               Altitude
             </Link>
             , where we&apos;re building real-world AI systems for healthcare.
           </p>
           <p>
-            I&apos;m based in New York. I studied at{" "}
+            I&apos;ve spent two decades building healthcare software. I started
+            as an engineer at Take Care Health (acquired by Walgreens), spent
+            nine years as CTO of New Ocean Health building an engineering org
+            and product suite from scratch, led engineering at Brightside
+            Health, and was CTO of aptihealth before joining Altitude. The
+            thread runs straight through: hard, regulated problems where the
+            software has to actually work.
+          </p>
+          <p>
+            I care about small teams that own their outcomes, and I treat AI as
+            a tool aimed at real problems — not a demo. In healthcare,
+            correctness and trust matter more than almost anywhere else, so I
+            put as much energy into evaluation, security, and governance as into
+            shipping.
+          </p>
+          <p>
+            I&apos;m based just outside Philadelphia and studied Computer
+            Engineering at{" "}
             <Link
               href="https://www.lehigh.edu"
               target="_blank"
               rel="noreferrer"
-              className="underline underline-offset-4"
+              className="u-link"
             >
               Lehigh University
             </Link>
-            .
-          </p>
-          <p>
-            The best way to reach me is{" "}
-            <Link
-              href="https://www.linkedin.com/in/christopherbetz"
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4"
-            >
-              LinkedIn
-            </Link>
-            .
+            . A long-running interest in gluten-free living explains a good
+            chunk of my side projects.
           </p>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">
-            Elsewhere
-          </h2>
-          <ul className="flex flex-wrap items-center gap-5">
-            {socialLinks.map(({ href, label, icon: Icon }) => (
+        <section className="mt-14">
+          <p className="eyebrow mb-5">Experience</p>
+          <ExperienceTimeline />
+        </section>
+
+        <section className="mt-14">
+          <p className="eyebrow mb-5">In brief</p>
+          <dl className="space-y-5">
+            {QA.map(({ q, a }) => (
+              <div key={q}>
+                <dt className="font-medium">{q}</dt>
+                <dd className="mt-1 leading-relaxed text-muted-foreground">
+                  {a}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <section className="mt-14">
+          <p className="eyebrow mb-4">Elsewhere</p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (
               <li key={label}>
-                <Link
+                <a
                   href={href}
                   target="_blank"
                   rel="noreferrer me"
-                  aria-label={label}
-                  className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <Icon className="size-5" />
+                  <Icon className="size-5" aria-hidden />
                   <span className="text-sm">{label}</span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
-        </div>
-      </article>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Prefer email?{" "}
+            <ContactEmail className="u-link text-foreground" />
+          </p>
+        </section>
+      </div>
     </Container>
   );
 }

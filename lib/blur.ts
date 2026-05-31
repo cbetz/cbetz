@@ -11,9 +11,10 @@ export async function getBlurDataURL(url: string): Promise<string | undefined> {
   }
 }
 
-export async function withBlur<T extends { coverImage: ContentfulAsset }>(
+export async function withBlur<T extends { coverImage?: ContentfulAsset }>(
   item: T
 ): Promise<T> {
+  if (!item.coverImage?.url) return item;
   const blurDataURL = await getBlurDataURL(item.coverImage.url);
   return {
     ...item,

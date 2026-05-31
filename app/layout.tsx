@@ -1,47 +1,45 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono, STIX_Two_Text } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { draftMode } from "next/headers";
 import Alert from "@/components/alert";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 import JsonLd from "@/components/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
+import { siteGraph } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site";
 import "@/styles/index.css";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Chris Betz",
-  url: SITE_URL,
-  description:
-    "Personal site of Chris Betz — Head of Engineering at Altitude, building real-world AI systems for healthcare.",
-  inLanguage: "en-US",
-  author: {
-    "@type": "Person",
-    name: "Chris Betz",
-    url: SITE_URL,
-  },
-};
-
-const geist = Geist({
+const geistSans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Serif used only for the name + page/case-study titles (editorial contrast).
+const stixSerif = STIX_Two_Text({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com"
-  ),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Chris Betz – Head of Engineering at Altitude",
     template: "%s | Chris Betz",
   },
   description:
-    "Chris Betz is Head of Engineering at Altitude, building real-world AI systems for healthcare. Writing, portfolio, and contact.",
-  authors: [{ name: "Chris Betz", url: "https://cbetz.com" }],
+    "Chris Betz is Head of Engineering at Altitude, building real-world AI systems for healthcare. Two decades shipping software across web, mobile, and applied AI.",
+  authors: [{ name: "Chris Betz", url: SITE_URL }],
   creator: "Chris Betz",
   icons: {
     apple: "/favicon/apple-touch-icon.png",
@@ -74,7 +72,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default async function RootLayout({
@@ -84,7 +85,11 @@ export default async function RootLayout({
 }) {
   const { isEnabled: preview } = await draftMode();
   return (
-    <html lang="en" className={geist.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${stixSerif.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="me" href="https://www.linkedin.com/in/christopherbetz" />
         <link rel="me" href="https://github.com/cbetz" />
@@ -92,17 +97,19 @@ export default async function RootLayout({
         <link rel="me" href="https://www.youtube.com/c/ChrisBetz" />
       </head>
       <body>
-        <JsonLd data={websiteSchema} />
+        <JsonLd data={siteGraph} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen">
-            <main>{children}</main>
-          </div>
           <Alert preview={preview} />
+          <div className="flex min-h-dvh flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

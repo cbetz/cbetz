@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import Container from "@/components/container";
-import PostBody from "@/components/post-body";
-import MoreItems from "@/components/more-items";
-import Header from "@/components/header";
 import ArticleHeader from "@/components/article-header";
+import AuthorBio from "@/components/author-bio";
+import Container from "@/components/container";
 import JsonLd from "@/components/json-ld";
+import MoreItems from "@/components/more-items";
+import PostBody from "@/components/post-body";
 import { Separator } from "@/components/ui/separator";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
   const allPosts = await getAllPostsWithSlug();
-  return allPosts?.map(({ slug }) => ({ slug })) ?? [];
+  return allPosts.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -35,9 +33,7 @@ export async function generateMetadata({
     description: post.excerpt,
     alternates: {
       canonical: `/blog/${post.slug}`,
-      types: {
-        "text/markdown": `/blog/${post.slug}/raw.md`,
-      },
+      types: { "text/markdown": `/blog/${post.slug}/raw.md` },
     },
     openGraph: {
       type: "article",
@@ -63,69 +59,42 @@ export default async function Post({ params }: { params: Params }) {
   if (!rawPost) notFound();
   const post = await withBlur(rawPost);
 
-  const blogPostingSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    image: post.coverImage.url,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Person",
-      name: "Chris Betz",
-      url: SITE_URL,
-    },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Writing",
-        item: `${SITE_URL}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.title,
-        item: `${SITE_URL}/blog/${post.slug}`,
-      },
-    ],
-  };
-
   return (
     <Container>
-      <JsonLd data={blogPostingSchema} />
-      <JsonLd data={breadcrumbSchema} />
-      <Header />
-      <article className="max-w-2xl mx-auto">
+      <JsonLd
+        data={blogPostingSchema({
+          title: post.title,
+          excerpt: post.excerpt,
+          image: post.coverImage?.url,
+          date: post.date,
+          slug: post.slug,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Writing", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
+      <article className="pt-4 md:pt-8">
         <ArticleHeader
-          backHref="/blog"
-          backLabel="All writing"
+          breadcrumb={[
+            { name: "Home", href: "/" },
+            { name: "Writing", href: "/blog" },
+            { name: post.title, href: `/blog/${post.slug}` },
+          ]}
           title={post.title}
           date={post.date}
           coverImage={post.coverImage}
         />
         <PostBody content={post.content} />
       </article>
-      <Separator className="my-20 max-w-2xl mx-auto" />
-      <div className="max-w-2xl mx-auto">
-        <MoreItems
-          title="More writing"
-          items={morePosts ?? []}
-          hrefPrefix="/blog"
-        />
+
+      <Separator className="my-12" />
+      <AuthorBio />
+      <div className="mt-16">
+        <MoreItems title="More writing" items={morePosts} hrefPrefix="/blog" />
       </div>
     </Container>
   );

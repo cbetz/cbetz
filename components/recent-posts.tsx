@@ -2,22 +2,33 @@ import Link from "next/link";
 import { format } from "date-fns";
 import type { Post } from "@/lib/types";
 
-export default function RecentPosts({ posts }: { posts: Post[] }) {
+export default function RecentPosts({
+  posts,
+  showExcerpt = false,
+}: {
+  posts: Post[];
+  showExcerpt?: boolean;
+}) {
   if (posts.length === 0) return null;
   return (
-    <ul className="divide-y divide-border">
+    <ul className="divide-y divide-hairline">
       {posts.map((post) => (
-        <li key={post.slug}>
+        <li key={post.slug} className="reveal">
           <Link
             href={`/blog/${post.slug}`}
-            className="group flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:justify-between md:gap-6"
+            className="group -mx-3 flex flex-col gap-1 rounded-md px-3 py-4 transition-colors hover:bg-wash sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
           >
-            <h3 className="text-lg md:text-xl font-medium leading-snug group-hover:underline underline-offset-4">
-              {post.title}
-            </h3>
+            <div className="min-w-0">
+              <span className="font-medium leading-snug">{post.title}</span>
+              {showExcerpt && post.excerpt && (
+                <span className="mt-0.5 block text-sm text-muted-foreground">
+                  {post.excerpt}
+                </span>
+              )}
+            </div>
             <time
               dateTime={post.date}
-              className="text-sm text-muted-foreground shrink-0"
+              className="shrink-0 font-mono text-xs uppercase tracking-wide tabular-nums text-muted-foreground"
             >
               {format(new Date(post.date), "MMM d, yyyy")}
             </time>

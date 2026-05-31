@@ -1,119 +1,78 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { draftMode } from "next/headers";
+import Capabilities from "@/components/capabilities";
 import Container from "@/components/container";
-import Header from "@/components/header";
+import ContactCTA from "@/components/contact-cta";
+import FeaturedProject from "@/components/featured-project";
 import Hero from "@/components/hero";
 import JsonLd from "@/components/json-ld";
-import PortfolioGrid from "@/components/portfolio-grid";
 import RecentPosts from "@/components/recent-posts";
-import { Separator } from "@/components/ui/separator";
+import SectionHeading from "@/components/section-heading";
+import WorkList from "@/components/work-list";
 import { getAllPortfolioItems, getAllPostsForHome } from "@/lib/api";
+import { profilePageSchema } from "@/lib/schema";
 import { withBlur } from "@/lib/blur";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
-
-const profilePageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  dateCreated: "2020-01-01T00:00:00Z",
-  dateModified: new Date().toISOString(),
-  mainEntity: {
-    "@type": "Person",
-    name: "Chris Betz",
-    alternateName: "Christopher Betz",
-    identifier: "chrisbetz",
-    url: SITE_URL,
-    description:
-      "Head of Engineering at Altitude, building real-world AI systems for healthcare.",
-    image:
-      "https://images.ctfassets.net/nld1cbd8nf0f/50rUigjk0iUdn6YaTR8fM1/cd888f0f0e4c6b6644301c8ca1526904/profile.png",
-    jobTitle: "Head of Engineering",
-    worksFor: {
-      "@type": "Organization",
-      name: "Altitude",
-      url: "https://joinaltitude.com",
-    },
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "Lehigh University",
-      url: "https://www.lehigh.edu",
-    },
-    knowsAbout: [
-      "Software engineering",
-      "Engineering management",
-      "Artificial intelligence",
-      "Healthcare technology",
-      "Applied AI",
-      "Product engineering",
-    ],
-    sameAs: [
-      "https://www.linkedin.com/in/christopherbetz",
-      "https://twitter.com/thechrisbetz",
-      "https://github.com/cbetz",
-      "https://www.youtube.com/c/ChrisBetz",
-    ],
-  },
-};
+function MoreLink({ href, children }: { href: string; children: string }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+    >
+      {children}
+      <ArrowRight className="size-4" strokeWidth={1.75} />
+    </Link>
+  );
+}
 
 export default async function Home() {
   const { isEnabled: preview } = await draftMode();
-  const [allPosts, rawPortfolioItems] = await Promise.all([
-    getAllPostsForHome(preview).then((p) => p ?? []),
-    getAllPortfolioItems(preview).then((p) => p ?? []),
+  const [allPosts, items] = await Promise.all([
+    getAllPostsForHome(preview),
+    getAllPortfolioItems(preview),
   ]);
-  const allPortfolioItems = await Promise.all(rawPortfolioItems.map(withBlur));
+
+  const featured = items.find((i) => i.featured) ?? items[0];
+  const featuredItem = featured ? await withBlur(featured) : undefined;
+  const rest = items.filter((i) => i.slug !== featured?.slug).slice(0, 5);
   const recentPosts = allPosts.slice(0, 3);
 
   return (
     <Container>
-      <JsonLd data={profilePageSchema} />
-      <Header />
+      <JsonLd data={profilePageSchema("/")} />
       <Hero />
-      <Section title="Selected work">
-        <PortfolioGrid items={allPortfolioItems} />
-      </Section>
-      <Separator className="my-20" />
-      <Section
-        title="Recent writing"
-        action={
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-medium hover:underline underline-offset-4"
-          >
-            All writing
-            <ArrowRight className="size-4" strokeWidth={1.75} />
-          </Link>
-        }
-        className="pb-24"
-      >
-        <RecentPosts posts={recentPosts} />
-      </Section>
-    </Container>
-  );
-}
 
-function Section({
-  title,
-  action,
-  className,
-  children,
-}: {
-  title: string;
-  action?: React.ReactNode;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className={className}>
-      <div className="flex items-baseline justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-          {title}
-        </h2>
-        {action}
+      <div className="mt-16 md:mt-24">
+        <Capabilities />
       </div>
-      {children}
-    </section>
+
+      {featuredItem && (
+        <div className="mt-16 md:mt-24">
+          <p className="sr-only">Featured project</p>
+          <FeaturedProject item={featuredItem} />
+        </div>
+      )}
+
+      <section className="mt-16 md:mt-24">
+        <SectionHeading
+          title="Selected work"
+          action={<MoreLink href="/portfolio">All work</MoreLink>}
+        />
+        <WorkList items={rest} />
+      </section>
+
+      <section className="mt-16 md:mt-24">
+        <SectionHeading
+          title="Writing"
+          action={<MoreLink href="/blog">All writing</MoreLink>}
+        />
+        <RecentPosts posts={recentPosts} />
+      </section>
+
+      <div className="mt-16 md:mt-24">
+        <ContactCTA />
+      </div>
+    </Container>
   );
 }
