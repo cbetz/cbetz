@@ -1,40 +1,20 @@
-import Container from "./container";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Container from "./container";
 
+// Renders only in Contentful preview mode; the old "source on GitHub" note now
+// lives in the site footer.
 export default function Alert({ preview }: { preview?: boolean }) {
+  if (!preview) return null;
+
   return (
-    <div
-      className={cn("border-b", {
-        "bg-accent-7 border-accent-7 text-white": preview,
-        "bg-accent-1 border-accent-2": !preview,
-      })}
-    >
-      <Container>
+    <div className="border-b border-hairline bg-foreground text-background">
+      <Container size="wide">
         <div className="py-2 text-center text-sm">
-          {preview ? (
-            <>
-              This is page is a preview.{" "}
-              <Link
-                href="/api/exit-preview">
-
-                  Click here
-
-              </Link>{" "}
-              to exit preview mode.
-            </>
-          ) : (
-            <>
-              The source code for this site is{" "}
-              <a
-                href={`https://github.com/cbetz/cbetz`}
-                className="underline hover:text-success duration-200 transition-colors"
-              >
-                available on GitHub
-              </a>
-              .
-            </>
-          )}
+          This page is a preview.{" "}
+          <Link href="/api/exit-preview" className="underline underline-offset-4">
+            Exit preview mode
+          </Link>
+          .
         </div>
       </Container>
     </div>

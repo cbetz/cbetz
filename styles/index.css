@@ -13,23 +13,19 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  --color-accent-1: #fafafa;
-  --color-accent-2: #eaeaea;
-  --color-accent-7: #333;
-  --color-success: #0070f3;
-  --color-cyan: #79ffe1;
-
   --tracking-tighter: -0.04em;
 
   --leading-tight: 1.2;
 
-  --text-5xl: 2.5rem;
-  --text-6xl: 2.75rem;
-  --text-7xl: 4.5rem;
-  --text-8xl: 6.25rem;
-
   --shadow-small: 0 5px 10px rgba(0, 0, 0, 0.12);
   --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  /* Motion tokens — the whole motion layer references these. */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 350ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /*
@@ -62,8 +58,13 @@
   ---break---
 */
 @theme inline {
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-serif);
   --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+  --color-brand: var(--brand);
+  --color-hairline: var(--hairline);
+  --color-wash: var(--hover-wash);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -118,13 +119,18 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.5 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* Signature accent — appears only on link-hover, focus ring, active nav. */
+  --brand: oklch(0.58 0.1 215);
+  --ring: var(--brand);
+  --hairline: oklch(0 0 0 / 0.08);
+  --hover-wash: oklch(0 0 0 / 0.04);
+  --measure: 42rem;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -155,13 +161,17 @@
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.72 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* Brand bumped lighter / less chroma so it stays legible on near-black. */
+  --brand: oklch(0.74 0.11 200);
+  --ring: var(--brand);
+  --hairline: oklch(1 0 0 / 0.1);
+  --hover-wash: oklch(1 0 0 / 0.06);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -175,4 +185,87 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+/*
+  ---break---
+*/
+@layer base {
+  body {
+    font-feature-settings: "calt" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Designed focus state — reuses the single accent, applied everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  /* Anchored sections (e.g. #contact) clear the top edge when jumped to. */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Signature inline link: hairline underline that warms to the accent on hover.
+   Text color never moves — only the underline color. */
+.u-link {
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-muted-foreground);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-standard);
+}
+.u-link:hover {
+  text-decoration-color: var(--brand);
+}
+
+/* Section eyebrow — 13px uppercase label above headings. */
+.eyebrow {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+/* Below-the-fold scroll reveal: zero JS, runs on the compositor, works in
+   server components. Per-element timelines give a natural stagger for free.
+   Guarded so non-supporting browsers / reduced-motion show content fully. */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/* One consolidated reduced-motion kill-switch. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [class*="animate-in"] {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }

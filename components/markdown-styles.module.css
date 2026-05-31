@@ -20,7 +20,7 @@
 }
 
 .markdown a {
-  @apply underline underline-offset-4 decoration-muted-foreground/40 hover:decoration-foreground transition-colors;
+  @apply underline underline-offset-[3px] decoration-1 decoration-muted-foreground/50 hover:decoration-brand transition-[text-decoration-color] duration-150;
 }
 
 .markdown ul {
@@ -40,7 +40,7 @@
 }
 
 .markdown pre {
-  @apply rounded-lg bg-muted p-4 overflow-x-auto my-6;
+  @apply rounded-lg bg-muted/60 ring-1 ring-hairline p-4 overflow-x-auto my-6;
 }
 
 .markdown pre code {
@@ -48,7 +48,7 @@
 }
 
 .markdown img {
-  @apply rounded-lg my-8 ring-1 ring-foreground/10;
+  @apply rounded-lg my-8 ring-1 ring-hairline;
 }
 
 .markdown hr {
