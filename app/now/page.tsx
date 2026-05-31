@@ -5,7 +5,7 @@ import ContactEmail from "@/components/contact-email";
 export const metadata: Metadata = {
   title: "Now",
   description:
-    "What Chris Betz is focused on right now — building production AI for healthcare at Altitude.",
+    "What Chris Betz is focused on right now: building production AI for healthcare at Altitude.",
   alternates: { canonical: "/now" },
 };
 
@@ -14,15 +14,15 @@ const LAST_UPDATED = "May 2026";
 const SECTIONS = [
   {
     heading: "Building",
-    body: "Leading engineering at Altitude — building production AI for healthcare. Right now that means LLM- and agent-driven clinical pipelines, the evaluation and governance that make them trustworthy, and EHR integrations (Epic, Athenahealth, SMART on FHIR).",
+    body: "Leading engineering at Altitude, building production AI for healthcare. Right now that means LLM- and agent-driven clinical pipelines, the evaluation and governance that make them trustworthy, and EHR integrations (Epic, Athenahealth, SMART on FHIR).",
   },
   {
     heading: "Thinking about",
-    body: "How to make AI dependable enough for regulated, high-stakes settings — the evaluation, guardrails, and team practices that keep clinical AI honest, not just impressive in a demo.",
+    body: "How to make AI dependable enough for regulated, high-stakes settings: the evaluation, guardrails, and team practices that keep clinical AI honest, not just impressive in a demo.",
   },
   {
     heading: "Tinkering on",
-    body: "Trove — open-source lookup tools and Claude skills for underused public healthcare data (CMS cost reports, IRS 990s, FDA approvals).",
+    body: "Trove: open-source lookup tools and Claude skills for underused public healthcare data (CMS cost reports, IRS 990s, FDA approvals).",
   },
 ];
 

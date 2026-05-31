@@ -25,7 +25,7 @@ export default function Hero() {
           </p>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Two decades turning hard, regulated problems into software that
-            ships — across web, mobile, and applied AI.
+            ships across web, mobile, and applied AI.
           </p>
         </div>
         <div className="animate-in fade-in slide-in-from-bottom-2 flex flex-wrap items-center gap-5 pt-1 delay-200 duration-500">

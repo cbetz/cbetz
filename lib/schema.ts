@@ -8,7 +8,7 @@ export const ORG_ID = `${ALTITUDE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const DESCRIPTION =
-  "Chris Betz is Head of Engineering at Altitude, building real-world AI systems for healthcare. Two decades shipping software across web, mobile, and applied AI — twice a CTO before Altitude.";
+  "Chris Betz is Head of Engineering at Altitude, building real-world AI systems for healthcare. Two decades shipping software across web, mobile, and applied AI. Twice a CTO before Altitude.";
 
 export const organizationEntity = {
   "@type": "Organization",

@@ -35,10 +35,10 @@ export const FALLBACK_POSTS: Post[] = [
     date: "2021-04-09",
     author: AUTHOR,
     excerpt:
-      "A hands-on walkthrough of building a React Native image labeler end to end with AWS Amplify — auth, a GraphQL API, DataStore, Storage, and Predictions.",
+      "A hands-on walkthrough of building a React Native image labeler end to end with AWS Amplify: auth, a GraphQL API, DataStore, Storage, and Predictions.",
     content: richText([
       "A step-by-step build of a React Native image labeler powered by AWS Amplify: authentication, a GraphQL API, offline-first DataStore, file Storage, and the Predictions category for image labeling.",
-      "Read the full post on the live site — the complete walkthrough lives in Contentful.",
+      "Read the full post on the live site; the complete walkthrough lives in Contentful.",
     ]),
   },
   {
@@ -47,10 +47,10 @@ export const FALLBACK_POSTS: Post[] = [
     date: "2020-12-18",
     author: AUTHOR,
     excerpt:
-      "A running list of genuinely gluten-free beers worth seeking out — the side project that kicked off a small family of gluten-free apps.",
+      "A running list of genuinely gluten-free beers worth seeking out. It's the side project that kicked off a small family of gluten-free apps.",
     content: richText([
-      "A curated list of gluten-free beers — the distinction between truly gluten-free and merely gluten-reduced, and the ones actually worth drinking.",
-      "Read the full post on the live site — the complete list lives in Contentful.",
+      "A curated list of gluten-free beers: the distinction between truly gluten-free and merely gluten-reduced, and the ones actually worth drinking.",
+      "Read the full post on the live site; the complete list lives in Contentful.",
     ]),
   },
 ];

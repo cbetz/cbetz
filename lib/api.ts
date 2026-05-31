@@ -183,7 +183,7 @@ export async function getPostAndMorePosts(
   return { post, morePosts };
 }
 
-// NOTE: queries portfolioItemCollection (not postCollection) — the previous
+// NOTE: queries portfolioItemCollection (not postCollection). The previous
 // version queried the wrong collection with portfolio-only fields, which
 // silently failed and kept portfolio items out of the sitemap + llms.txt.
 export async function getAllPortfolioItemsWithSlug(): Promise<PortfolioItem[]> {

@@ -34,7 +34,7 @@ const stixSerif = STIX_Two_Text({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Chris Betz – Head of Engineering at Altitude",
+    default: "Chris Betz, Head of Engineering at Altitude",
     template: "%s | Chris Betz",
   },
   description:

@@ -12,7 +12,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     title: "Trove",
     oneLiner: "Open-source lookup tools and Claude skills for public healthcare data",
     blurb:
-      "Trove turns public-domain healthcare datasets that are widely cited but nearly impossible to use in raw form — CMS Medicare Cost Reports, IRS Form 990 Schedule H hospital financials, FDA drug-approval reviews — into clean, queryable bundles. Each dataset ships as both a search-first web lookup for people and an installable Claude skill for agents.",
+      "Trove turns public-domain healthcare datasets that are widely cited but nearly impossible to use in raw form into clean, queryable bundles: CMS Medicare Cost Reports, IRS Form 990 Schedule H hospital financials, and FDA drug-approval reviews. Each dataset ships as both a search-first web lookup for people and an installable Claude skill for agents.",
     category: "Healthcare AI",
     year: "2026",
     role: "Solo build",
@@ -21,7 +21,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
       "Packages opaque federal datasets (HCRIS cost reports, IRS 990 Schedule H, FDA approvals) into clean, queryable bundles",
       "Dual-surfaced: a search-first web lookup for people and an installable Claude skill for agents",
       "Decodes raw worksheet/line/column schemas so charity-care, beds, staffing, and trial evidence are usable without manual parsing",
-      "Open-source and built on public-domain data — reproducible and free to extend",
+      "Open-source and built on public-domain data: reproducible and free to extend",
     ],
     featured: true,
     link: null,
@@ -36,7 +36,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     role: "Design + engineering",
     stack: ["Next.js", "React", "AI agents"],
     highlights: [
-      "Composable, headless-EHR-first architecture — choose the EHR backend, then assemble integrations on top",
+      "Composable, headless-EHR-first architecture: choose the EHR backend, then assemble integrations on top",
       "AI agents as a first-class building block, not a bolt-on",
       "Low-code surface aimed at cutting EHR build time so teams focus on clinical outcomes",
     ],
@@ -47,13 +47,13 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     title: "Gluten Free Scout",
     oneLiner: "Cross-platform gluten-free product discovery with community reviews",
     blurb:
-      "A consumer app for discovering, rating, and reviewing gluten-free products, with the ability to save favorites and share them. Built cross-platform from a shared React core — a Next.js site and a React Native client — so the catalog, reviews, and saved lists stay consistent everywhere a user lands.",
+      "A consumer app for discovering, rating, and reviewing gluten-free products, with the ability to save favorites and share them. Built cross-platform from a shared React core (a Next.js site and a React Native client), so the catalog, reviews, and saved lists stay consistent everywhere a user lands.",
     category: "Mobile app",
     year: "2024",
     role: "Solo build",
     stack: ["Next.js", "React", "React Native"],
     highlights: [
-      "Cross-platform from a shared React core — Next.js for web, React Native for mobile",
+      "Cross-platform from a shared React core: Next.js for web, React Native for mobile",
       "Community layer: ratings, reviews, save-to-favorites, and social sharing",
       "Product-discovery focus solving a real, niche dietary need",
     ],
@@ -71,7 +71,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     stack: ["Next.js", "React", "Sanity", "Mantine"],
     highlights: [
       "Sanity headless CMS structures vehicle reviews and guides for non-developer authoring",
-      "Next.js server rendering keeps discovery pages fast and indexable — central to an SEO-driven product",
+      "Next.js server rendering keeps discovery pages fast and indexable, central to an SEO-driven product",
       "Search matches EV models to a buyer's needs rather than listing a flat catalog",
     ],
     featured: false,
@@ -81,7 +81,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     title: "All Beer No Gluten",
     oneLiner: "A searchable database of truly gluten-free beers",
     blurb:
-      "A curated, searchable catalog of beers that are genuinely gluten-free rather than merely gluten-reduced — a distinction that matters to people with celiac disease. Visitors browse and filter by style, brewery, and name, with the catalog maintained as editorial content in a headless CMS so updates ship without touching code.",
+      "A curated, searchable catalog of beers that are genuinely gluten-free rather than merely gluten-reduced, a distinction that matters to people with celiac disease. Visitors browse and filter by style, brewery, and name, with the catalog maintained as editorial content in a headless CMS so updates ship without touching code.",
     category: "Web app",
     year: "2021",
     role: "Solo build",
@@ -115,7 +115,7 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     title: "Flight Master",
     oneLiner: "An iOS app to set and close a daily Flights Climbed goal",
     blurb:
-      "Flight Master is an iOS fitness utility that lets you set a daily Flights Climbed target and track progress toward closing the ring. It reads Apple Health's Flights Climbed metric, turning a normally overlooked HealthKit data point into a first-class daily goal — built fully in SwiftUI as an early adopter of Apple's declarative UI framework.",
+      "Flight Master is an iOS fitness utility that lets you set a daily Flights Climbed target and track progress toward closing the ring. It reads Apple Health's Flights Climbed metric, turning a normally overlooked HealthKit data point into a first-class daily goal, built fully in SwiftUI as an early adopter of Apple's declarative UI framework.",
     category: "Mobile app",
     year: "2020",
     role: "Solo build",

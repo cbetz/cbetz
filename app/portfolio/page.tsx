@@ -7,7 +7,7 @@ import { getAllPortfolioItems } from "@/lib/api";
 import { collectionPageSchema } from "@/lib/schema";
 
 const DESCRIPTION =
-  "Selected work by Chris Betz — healthcare AI, web apps, and mobile, from open-source tools to production platforms.";
+  "Selected work by Chris Betz: healthcare AI, web apps, and mobile, from open-source tools to production platforms.";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -23,7 +23,7 @@ export default async function PortfolioIndex() {
     <Container>
       <JsonLd
         data={collectionPageSchema({
-          name: "Work — Chris Betz",
+          name: "Work by Chris Betz",
           path: "/portfolio",
           description: DESCRIPTION,
         })}
@@ -34,7 +34,7 @@ export default async function PortfolioIndex() {
           Selected work
         </h1>
         <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">
-          Healthcare AI, web apps, and mobile — from open-source tools to
+          Healthcare AI, web apps, and mobile, from open-source tools to
           production platforms. A mix of work I&apos;ve led and side projects
           I&apos;ve shipped solo.
         </p>

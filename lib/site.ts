@@ -35,7 +35,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-// Same set, URLs only — used for schema.org sameAs and <link rel="me">.
+// Same set, URLs only, used for schema.org sameAs and <link rel="me">.
 export const SAME_AS = SOCIAL_LINKS.map((s) => s.href);
 
 export const NAV_LINKS = [

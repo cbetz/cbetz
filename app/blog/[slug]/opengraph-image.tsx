@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { format } from "date-fns";
 import { getPostAndMorePosts } from "@/lib/api";
 
-export const alt = "Chris Betz — Writing";
+export const alt = "Writing by Chris Betz";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

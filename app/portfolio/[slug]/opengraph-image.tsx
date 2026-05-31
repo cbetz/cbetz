@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getPortfolioItemAndMorePortfolioItems } from "@/lib/api";
 
-export const alt = "Chris Betz — Portfolio";
+export const alt = "Work by Chris Betz";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

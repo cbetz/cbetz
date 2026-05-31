@@ -7,7 +7,7 @@ const ITEMS: { icon: IconComponent; label: string; sub: string }[] = [
   {
     icon: Brain,
     label: "Applied AI in healthcare",
-    sub: "LLM and agent pipelines for clinical decisions — with evaluation and governance.",
+    sub: "LLM and agent pipelines for clinical decisions, with evaluation and governance.",
   },
   {
     icon: Users,

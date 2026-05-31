@@ -4,7 +4,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://cbetz.com";
 const SITE_TITLE = "Chris Betz";
 const SITE_DESCRIPTION =
-  "Notes, essays, and posts by Chris Betz — Head of Engineering at Altitude.";
+  "Notes, essays, and posts by Chris Betz, Head of Engineering at Altitude.";
 
 function escapeXml(s: string): string {
   return s

@@ -11,7 +11,7 @@ import { ALTITUDE_URL, PROFILE_IMAGE_URL, SOCIAL_LINKS } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Chris Betz — Head of Engineering at Altitude. Two decades building healthcare software, twice a CTO. Based in the Philadelphia area.",
+    "Chris Betz, Head of Engineering at Altitude. Two decades building healthcare software, twice a CTO. Based in the Philadelphia area.",
   alternates: { canonical: "/about" },
 };
 
@@ -26,7 +26,7 @@ const QA = [
   },
   {
     q: "Where is Chris Betz based?",
-    a: "The Philadelphia area — Media, Pennsylvania — working remotely.",
+    a: "The Philadelphia area (Media, Pennsylvania), working remotely.",
   },
   {
     q: "Where did Chris Betz study?",
@@ -91,7 +91,7 @@ export default function AboutPage() {
           </p>
           <p>
             I care about small teams that own their outcomes, and I treat AI as
-            a tool aimed at real problems — not a demo. In healthcare,
+            a tool aimed at real problems, not a demo. In healthcare,
             correctness and trust matter more than almost anywhere else, so I
             put as much energy into evaluation, security, and governance as into
             shipping.

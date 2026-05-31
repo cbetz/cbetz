@@ -20,7 +20,7 @@
   --shadow-small: 0 5px 10px rgba(0, 0, 0, 0.12);
   --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
 
-  /* Motion tokens — the whole motion layer references these. */
+  /* Motion tokens. The whole motion layer references these. */
   --dur-fast: 150ms;
   --dur-base: 250ms;
   --dur-slow: 350ms;
@@ -125,7 +125,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  /* Signature accent — appears only on link-hover, focus ring, active nav. */
+  /* Signature accent: appears only on link-hover, focus ring, active nav. */
   --brand: oklch(0.58 0.1 215);
   --ring: var(--brand);
   --hairline: oklch(0 0 0 / 0.08);
@@ -195,7 +195,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  /* Designed focus state — reuses the single accent, applied everywhere. */
+  /* Designed focus state that reuses the single accent, applied everywhere. */
   :focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 2px;
@@ -208,7 +208,7 @@
 }
 
 /* Signature inline link: hairline underline that warms to the accent on hover.
-   Text color never moves — only the underline color. */
+   Text color never moves; only the underline color does. */
 .u-link {
   text-decoration-line: underline;
   text-decoration-color: var(--color-muted-foreground);
@@ -220,7 +220,7 @@
   text-decoration-color: var(--brand);
 }
 
-/* Section eyebrow — 13px uppercase label above headings. */
+/* Section eyebrow: 13px uppercase label above headings. */
 .eyebrow {
   font-size: 0.8125rem;
   line-height: 1.4;

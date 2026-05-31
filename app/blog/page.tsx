@@ -7,7 +7,7 @@ import { getAllPostsForHome } from "@/lib/api";
 import { collectionPageSchema } from "@/lib/schema";
 
 const DESCRIPTION =
-  "Notes on building software, AI, and the occasional side project — by Chris Betz.";
+  "Notes on building software, AI, and the occasional side project, by Chris Betz.";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -23,7 +23,7 @@ export default async function BlogIndex() {
     <Container>
       <JsonLd
         data={collectionPageSchema({
-          name: "Writing — Chris Betz",
+          name: "Writing by Chris Betz",
           path: "/blog",
           description: DESCRIPTION,
         })}
