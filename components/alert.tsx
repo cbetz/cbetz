@@ -7,7 +7,7 @@ export default function Alert({ preview }: { preview?: boolean }) {
   if (!preview) return null;
 
   return (
-    <div className="border-b border-hairline bg-foreground text-background">
+    <div className="border-b border-hairline bg-foreground text-background print:hidden">
       <Container size="wide">
         <div className="py-2 text-center text-sm">
           This page is a preview.{" "}

@@ -11,7 +11,7 @@ export default function Header() {
   const pathname = usePathname() || "/";
 
   return (
-    <header className="py-6">
+    <header className="py-6 print:hidden">
       <Container>
         <div className="flex items-center justify-between">
           <Link
@@ -28,7 +28,10 @@ export default function Header() {
                     ? pathname === "/"
                     : pathname.startsWith(link.href);
                 return (
-                  <li key={link.href}>
+                  <li
+                    key={link.href}
+                    className={cn(link.headerMobileHidden && "hidden sm:block")}
+                  >
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}

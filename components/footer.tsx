@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 border-t border-hairline py-10 md:mt-32">
+    <footer className="mt-24 border-t border-hairline py-10 md:mt-32 print:hidden">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="flex flex-col gap-6 sm:flex-row sm:gap-16">
             <nav aria-label="Footer">
               <ul className="space-y-2 text-sm">
-                {NAV_LINKS.map((link) => (
+                {[...NAV_LINKS, { href: "/resume", label: "Resume" }].map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ContactEmail from "@/components/contact-email";
 import SectionHeading from "@/components/section-heading";
 
@@ -20,6 +21,9 @@ export default function ContactCTA() {
         >
           LinkedIn
         </a>
+        <Link href="/resume" className="u-link">
+          Resume
+        </Link>
       </div>
     </section>
   );

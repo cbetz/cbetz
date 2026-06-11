@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/portfolio`, lastModified: now },
     { url: `${SITE_URL}/blog`, lastModified: now },
     { url: `${SITE_URL}/now`, lastModified: now },
+    { url: `${SITE_URL}/resume`, lastModified: now },
   ];
 
   const postRoutes: MetadataRoute.Sitemap =

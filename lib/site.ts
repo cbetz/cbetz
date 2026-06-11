@@ -38,9 +38,17 @@ export const SOCIAL_LINKS: SocialLink[] = [
 // Same set, URLs only, used for schema.org sameAs and <link rel="me">.
 export const SAME_AS = SOCIAL_LINKS.map((s) => s.href);
 
-export const NAV_LINKS = [
+export const NAV_LINKS: {
+  href: string;
+  label: string;
+  headerMobileHidden?: boolean;
+}[] = [
   { href: "/portfolio", label: "Work" },
   { href: "/blog", label: "Writing" },
   { href: "/about", label: "About" },
   { href: "/now", label: "Now" },
+  // Anchor on the home page; from other routes it navigates home and scrolls.
+  // Hidden in the header below sm (five links + the theme toggle overflow
+  // phone widths); mobile users reach contact via the home CTA and footer.
+  { href: "/#contact", label: "Contact", headerMobileHidden: true },
 ];
