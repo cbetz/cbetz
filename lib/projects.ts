@@ -24,7 +24,8 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
       "Open-source and built on public-domain data: reproducible and free to extend",
     ],
     featured: true,
-    link: null,
+    link: "https://troveproject.com",
+    repo: "https://github.com/cbetz/trove",
   },
   "last-ehr": {
     title: "Last EHR",

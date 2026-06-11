@@ -14,6 +14,7 @@ type Props = {
   coverImage?: ContentfulAsset;
   tags?: string[] | null;
   externalLink?: string | null;
+  repoLink?: string | null;
   byline?: boolean;
 };
 
@@ -24,6 +25,7 @@ export default function ArticleHeader({
   coverImage,
   tags,
   externalLink,
+  repoLink,
   byline = true,
 }: Props) {
   return (
@@ -96,6 +98,20 @@ export default function ArticleHeader({
               className="inline-flex items-center gap-1 text-foreground u-link"
             >
               Visit
+              <ArrowUpRight className="size-3.5" strokeWidth={1.75} />
+            </a>
+          </>
+        )}
+        {repoLink && (
+          <>
+            <span aria-hidden>·</span>
+            <a
+              href={repoLink}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-foreground u-link"
+            >
+              Source
               <ArrowUpRight className="size-3.5" strokeWidth={1.75} />
             </a>
           </>

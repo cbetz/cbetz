@@ -106,6 +106,7 @@ export default async function PortfolioItemPage({
           coverImage={post.coverImage}
           tags={post.stack ?? post.tags}
           externalLink={post.link}
+          repoLink={post.repo}
         />
 
         {facts.length > 0 && (

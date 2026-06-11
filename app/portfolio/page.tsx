@@ -18,6 +18,8 @@ export const metadata: Metadata = {
 export default async function PortfolioIndex() {
   const { isEnabled: preview } = await draftMode();
   const items = await getAllPortfolioItems(preview);
+  const featured = items.filter((i) => i.featured);
+  const sideProjects = items.filter((i) => !i.featured);
 
   return (
     <Container>
@@ -34,14 +36,36 @@ export default async function PortfolioIndex() {
           Selected work
         </h1>
         <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">
-          Healthcare AI, web apps, and mobile, from open-source tools to
-          production platforms. A mix of work I&apos;ve led and side projects
-          I&apos;ve shipped solo.
+          Healthcare AI and the tools around it, plus the side projects I ship
+          to keep my hands in the code.
         </p>
       </header>
-      <div className="mt-10 md:mt-12">
-        <WorkList items={items} />
-      </div>
+      {items.length === 0 && (
+        <p className="mt-10 leading-relaxed text-muted-foreground md:mt-12">
+          Project write-ups are on their way. In the meantime, recent work
+          lives on{" "}
+          <a
+            href="https://github.com/cbetz"
+            target="_blank"
+            rel="noreferrer"
+            className="u-link text-foreground"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      )}
+      {featured.length > 0 && (
+        <div className="mt-10 md:mt-12">
+          <WorkList items={featured} />
+        </div>
+      )}
+      {sideProjects.length > 0 && (
+        <section className="mt-12 md:mt-16">
+          <h2 className="eyebrow mb-5">Side projects</h2>
+          <WorkList items={sideProjects} />
+        </section>
+      )}
     </Container>
   );
 }

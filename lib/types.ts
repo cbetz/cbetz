@@ -48,6 +48,7 @@ export type ProjectMeta = {
   highlights: string[];
   featured: boolean;
   link?: string | null;
+  repo?: string | null;
 };
 
 export type EnrichedPortfolioItem = PortfolioItem & Partial<ProjectMeta>;

@@ -11,6 +11,7 @@ function yearOf(item: EnrichedPortfolioItem): string | null {
 function WorkRow({ item }: { item: EnrichedPortfolioItem }) {
   const year = yearOf(item);
   const meta = [item.category, year].filter(Boolean).join(" · ");
+  const subtitle = item.oneLiner ?? item.excerpt;
   return (
     <li className="reveal">
       <Link
@@ -25,9 +26,11 @@ function WorkRow({ item }: { item: EnrichedPortfolioItem }) {
               strokeWidth={1.75}
             />
           </span>
-          <span className="mt-0.5 block text-sm text-muted-foreground">
-            {item.oneLiner ?? item.excerpt}
-          </span>
+          {subtitle && (
+            <span className="mt-0.5 block text-sm text-muted-foreground">
+              {subtitle}
+            </span>
+          )}
         </div>
         {meta && (
           <span className="shrink-0 font-mono text-xs uppercase tracking-wide tabular-nums text-muted-foreground">

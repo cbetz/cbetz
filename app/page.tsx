@@ -35,7 +35,14 @@ export default async function Home() {
 
   const featured = items.find((i) => i.featured) ?? items[0];
   const featuredItem = featured ? await withBlur(featured) : undefined;
-  const rest = items.filter((i) => i.slug !== featured?.slug).slice(0, 5);
+  // Professional work gets top billing; hobby apps are grouped separately so
+  // the evidence layer matches the leadership positioning.
+  const selected = items.filter(
+    (i) => i.featured && i.slug !== featured?.slug
+  );
+  const sideProjects = items
+    .filter((i) => !i.featured && i.slug !== featured?.slug)
+    .slice(0, 4);
   const recentPosts = allPosts.slice(0, 3);
 
   return (
@@ -54,21 +61,32 @@ export default async function Home() {
         </div>
       )}
 
-      <section className="mt-16 md:mt-24">
-        <SectionHeading
-          title="Selected work"
-          action={<MoreLink href="/portfolio">All work</MoreLink>}
-        />
-        <WorkList items={rest} />
-      </section>
+      {selected.length > 0 && (
+        <section className="mt-16 md:mt-24">
+          <SectionHeading title="Selected work" />
+          <WorkList items={selected} />
+        </section>
+      )}
 
-      <section className="mt-16 md:mt-24">
-        <SectionHeading
-          title="Writing"
-          action={<MoreLink href="/blog">All writing</MoreLink>}
-        />
-        <RecentPosts posts={recentPosts} />
-      </section>
+      {sideProjects.length > 0 && (
+        <section className="mt-16 md:mt-24">
+          <SectionHeading
+            title="Side projects"
+            action={<MoreLink href="/portfolio">All work</MoreLink>}
+          />
+          <WorkList items={sideProjects} />
+        </section>
+      )}
+
+      {recentPosts.length > 0 && (
+        <section className="mt-16 md:mt-24">
+          <SectionHeading
+            title="Writing"
+            action={<MoreLink href="/blog">All writing</MoreLink>}
+          />
+          <RecentPosts posts={recentPosts} />
+        </section>
+      )}
 
       <div className="mt-16 md:mt-24">
         <ContactCTA />

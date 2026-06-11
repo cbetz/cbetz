@@ -52,7 +52,7 @@ export default function FeaturedProject({
             </ul>
           )}
           <span className="inline-flex items-center gap-1 text-sm font-medium">
-            Read the case study
+            View the project
             <ArrowRight
               className="size-4 transition-transform group-hover:translate-x-0.5"
               strokeWidth={1.75}

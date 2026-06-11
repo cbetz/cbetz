@@ -27,6 +27,11 @@ export default function Hero() {
             Two decades turning hard, regulated problems into software that
             ships across web, mobile, and applied AI.
           </p>
+          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Before Altitude: CTO at aptihealth, leader of 30+ engineers at
+            Brightside Health, CTO of New Ocean Health for nine years, and
+            engineer at Take Care Health (acquired by Walgreens).
+          </p>
         </div>
         <div className="animate-in fade-in slide-in-from-bottom-2 flex flex-wrap items-center gap-5 pt-1 delay-200 duration-500">
           <Button asChild className="h-10 px-5">
