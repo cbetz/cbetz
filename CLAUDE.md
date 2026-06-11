@@ -36,4 +36,6 @@ Personal site: Next.js **App Router** + TypeScript + Tailwind 4 + shadcn/ui, con
 - TypeScript is strict. Page-level prop types are inferred via `params: Promise<{ slug: string }>` (Next 15+ async params).
 - The Contentful GraphQL queries interpolate `slug` directly into the query string. Slugs come from Contentful (trusted) and Next.js route params, so this is fine for current usage but worth noting before exposing any user-supplied input to these helpers.
 - `next.config.js` whitelists `images.ctfassets.net` for `next/image`; any new image host must be added there.
-- The OG image is self-hosted at `/public/og-image.jpg` (not yet uploaded — link previews 404 until that file exists).
+- OG images are generated at request time by `app/opengraph-image.tsx` and the per-slug `opengraph-image.tsx` routes — there is no static OG image file, and none is needed.
+- `contentful/export.json` contains only the content model (no entries, no assets) and has drifted from the live space — it lacks the `portfolioItem` content type the code queries. Re-bootstrapping from it would restore structure only, and incompletely; treat the live space as the only source of truth for content.
+- `drafts/` is gitignored on purpose: it holds pre-publication writing (posts, case studies) and off-site checklists that should never land in this public repo.

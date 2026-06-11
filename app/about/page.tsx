@@ -22,7 +22,7 @@ const QA = [
   },
   {
     q: "What does Chris Betz do?",
-    a: "He leads engineering, data, security, and applied-AI strategy at Altitude, building production AI systems for healthcare. Before Altitude he was CTO of aptihealth and of New Ocean Health.",
+    a: "He leads engineering, data, security, and applied-AI strategy at Altitude, whose clinical intelligence platform helps primary care clinicians manage chronic conditions. Before Altitude he was CTO of aptihealth and of New Ocean Health.",
   },
   {
     q: "Where is Chris Betz based?",
@@ -78,7 +78,10 @@ export default function AboutPage() {
             >
               Altitude
             </Link>
-            , where we&apos;re building real-world AI systems for healthcare.
+            , where we build clinical intelligence software for chronic
+            condition management: AI that helps primary care teams manage
+            conditions like hypertension, diabetes, and heart failure, and
+            extends their reach between visits.
           </p>
           <p>
             I&apos;ve spent two decades building healthcare software. I started
@@ -151,6 +154,11 @@ export default function AboutPage() {
           <p className="mt-6 text-sm text-muted-foreground">
             Prefer email?{" "}
             <ContactEmail className="u-link text-foreground" />
+            <span aria-hidden> · </span>
+            Need a resume?{" "}
+            <Link href="/resume" className="u-link text-foreground">
+              Printable version
+            </Link>
           </p>
         </section>
       </div>

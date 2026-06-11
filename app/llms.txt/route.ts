@@ -2,6 +2,7 @@ import {
   getAllPortfolioItemsWithSlug,
   getAllPostsWithSlug,
 } from "@/lib/api";
+import { enrichPortfolioItem, sortProjects } from "@/lib/projects";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
@@ -20,12 +21,21 @@ export async function GET() {
         )
       : ["_No posts yet._"];
 
+  // Prefer the curated editorial copy (oneLiner, category, year) over raw
+  // Contentful excerpts so the machine-readable surface carries the same
+  // framing as the rendered site.
+  const enriched = sortProjects((items ?? []).map(enrichPortfolioItem));
   const itemLines =
-    items && items.length > 0
-      ? items.map(
-          (it) =>
-            `- [${it.title}](${SITE_URL}/portfolio/${it.slug}): ${it.excerpt}`
-        )
+    enriched.length > 0
+      ? enriched.map((it) => {
+          const meta = [it.category, it.year, it.role]
+            .filter(Boolean)
+            .join(", ");
+          const summary = it.oneLiner ?? it.excerpt;
+          return `- [${it.title}](${SITE_URL}/portfolio/${it.slug}): ${summary}${
+            meta ? ` (${meta})` : ""
+          }`;
+        })
       : ["_No portfolio items yet._"];
 
   const body = [
@@ -33,7 +43,7 @@ export async function GET() {
     "",
     "> Head of Engineering at Altitude. Building real-world AI systems for healthcare.",
     "",
-    "Personal site of Chris Betz (also known as Christopher Betz). Currently Head of Engineering at [Altitude](https://joinaltitude.com), where I build real-world AI systems for healthcare. Two decades building healthcare software, twice a CTO before Altitude. Based in the Philadelphia area. This site is a portfolio of selected work and a blog.",
+    "Personal site of Chris Betz (also known as Christopher Betz). Currently Head of Engineering at [Altitude](https://joinaltitude.com), which builds a clinical intelligence platform for chronic condition management. Two decades building healthcare software; previously CTO of aptihealth, CTO of New Ocean Health for nine years, and leader of 30+ engineers at Brightside Health. Based in Media, Pennsylvania (Philadelphia area). This site is a portfolio of selected work and a blog.",
     "",
     "Every blog post and portfolio item has a clean markdown variant at `<page-url>/raw.md` (e.g. `/blog/foo/raw.md`). The HTML version also advertises this via `<link rel=\"alternate\" type=\"text/markdown\">`.",
     "",
@@ -44,6 +54,7 @@ export async function GET() {
     `- [Writing](${SITE_URL}/blog): Notes, essays, and posts`,
     `- [About](${SITE_URL}/about): Bio, career history, and contact`,
     `- [Now](${SITE_URL}/now): What I'm focused on right now`,
+    `- [Resume](${SITE_URL}/resume): Printable resume / CV`,
     "",
     "## Writing",
     "",

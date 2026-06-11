@@ -15,7 +15,8 @@ export const organizationEntity = {
   "@id": ORG_ID,
   name: "Altitude",
   url: ALTITUDE_URL,
-  description: "A healthcare-AI company.",
+  description:
+    "Altitude builds a clinical intelligence platform for chronic condition management, helping primary care clinicians manage conditions like hypertension, diabetes, and heart failure with AI-powered recommendations and automated care coordination.",
 };
 
 export const personEntity = {

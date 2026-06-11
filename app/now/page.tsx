@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import Container from "@/components/container";
 import ContactEmail from "@/components/contact-email";
 
@@ -9,12 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/now" },
 };
 
-const LAST_UPDATED = "May 2026";
+const LAST_UPDATED = "June 2026";
 
-const SECTIONS = [
+const SECTIONS: { heading: string; body: ReactNode }[] = [
   {
     heading: "Building",
-    body: "Leading engineering at Altitude, building production AI for healthcare. Right now that means LLM- and agent-driven clinical pipelines, the evaluation and governance that make them trustworthy, and EHR integrations (Epic, Athenahealth, SMART on FHIR).",
+    body: "Leading engineering at Altitude, building production AI for healthcare. Right now that means LLM- and agent-driven clinical pipelines, the evaluation and governance that make them trustworthy, and EHR integrations (Epic, athenahealth, SMART on FHIR).",
   },
   {
     heading: "Thinking about",
@@ -22,7 +24,15 @@ const SECTIONS = [
   },
   {
     heading: "Tinkering on",
-    body: "Trove: open-source lookup tools and Claude skills for underused public healthcare data (CMS cost reports, IRS 990s, FDA approvals).",
+    body: (
+      <>
+        <Link href="/portfolio/trove-project" className="u-link text-foreground">
+          Trove
+        </Link>
+        : open-source lookup tools and Claude skills for underused public
+        healthcare data (CMS cost reports, IRS 990s, FDA approvals).
+      </>
+    ),
   },
 ];
 

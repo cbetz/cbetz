@@ -35,3 +35,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# pre-publication writing and off-site checklists (never commit to this public repo)
+/drafts/
