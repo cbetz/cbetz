@@ -38,7 +38,23 @@ export default async function BlogIndex() {
         </p>
       </header>
       <div className="mt-10 md:mt-12">
-        <RecentPosts posts={allPosts} showExcerpt />
+        {allPosts.length === 0 ? (
+          <p className="leading-relaxed text-muted-foreground">
+            New writing is in progress. Until it lands here, I&apos;m most
+            active on{" "}
+            <a
+              href="https://www.linkedin.com/in/christopherbetz"
+              target="_blank"
+              rel="noreferrer me"
+              className="u-link text-foreground"
+            >
+              LinkedIn
+            </a>
+            .
+          </p>
+        ) : (
+          <RecentPosts posts={allPosts} showExcerpt />
+        )}
       </div>
     </Container>
   );
