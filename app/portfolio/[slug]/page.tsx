@@ -7,12 +7,16 @@ import Container from "@/components/container";
 import JsonLd from "@/components/json-ld";
 import MoreItems from "@/components/more-items";
 import PostBody from "@/components/post-body";
+import RelatedLinks from "@/components/related-links";
 import { Separator } from "@/components/ui/separator";
 import {
   getAllPortfolioItemsWithSlug,
+  getAllPostsForHome,
   getPortfolioItemAndMorePortfolioItems,
 } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
+import { withoutMovedPosts } from "@/lib/moved";
+import { PROJECT_POST_LINKS } from "@/lib/projects";
 import { breadcrumbSchema, creativeWorkSchema } from "@/lib/schema";
 
 type Params = Promise<{ slug: string }>;
@@ -67,6 +71,19 @@ export default async function PortfolioItemPage({
 
   if (!rawPost) notFound();
   const post = await withBlur(rawPost);
+
+  // Only fetch posts when this project actually has writing attached.
+  const relatedPostSlugs = PROJECT_POST_LINKS[slug] ?? [];
+  const relatedPosts =
+    relatedPostSlugs.length > 0
+      ? withoutMovedPosts(await getAllPostsForHome(preview))
+          .filter((p) => relatedPostSlugs.includes(p.slug))
+          .map((p) => ({
+            href: `/blog/${p.slug}`,
+            title: p.title,
+            description: p.excerpt,
+          }))
+      : [];
 
   const facts = [
     post.role && { label: "Role", value: post.role },
@@ -141,6 +158,8 @@ export default async function PortfolioItemPage({
 
         <PostBody content={post.content} />
       </article>
+
+      <RelatedLinks title="Writing about this project" links={relatedPosts} />
 
       <Separator className="my-12" />
       <AuthorBio />

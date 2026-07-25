@@ -11,6 +11,7 @@ import RecentPosts from "@/components/recent-posts";
 import SectionHeading from "@/components/section-heading";
 import WorkList from "@/components/work-list";
 import { getAllPortfolioItems, getAllPostsForHome } from "@/lib/api";
+import { withoutMovedPosts } from "@/lib/moved";
 import { profilePageSchema } from "@/lib/schema";
 import { withBlur } from "@/lib/blur";
 
@@ -40,10 +41,14 @@ export default async function Home() {
   const selected = items.filter(
     (i) => i.featured && i.slug !== featured?.slug
   );
-  const sideProjects = items
-    .filter((i) => !i.featured && i.slug !== featured?.slug)
-    .slice(0, 4);
-  const recentPosts = allPosts.slice(0, 3);
+  // Every project listed, not a top-4 slice: the home page is the most
+  // frequently crawled page on the site, so a case study that appears here
+  // gets discovered, and one that only appears on /portfolio often doesn't.
+  // WorkList rows are compact enough that the full list still reads well.
+  const sideProjects = items.filter(
+    (i) => !i.featured && i.slug !== featured?.slug
+  );
+  const recentPosts = withoutMovedPosts(allPosts).slice(0, 3);
 
   return (
     <Container>

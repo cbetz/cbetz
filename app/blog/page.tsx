@@ -4,6 +4,7 @@ import Container from "@/components/container";
 import JsonLd from "@/components/json-ld";
 import RecentPosts from "@/components/recent-posts";
 import { getAllPostsForHome } from "@/lib/api";
+import { withoutMovedPosts } from "@/lib/moved";
 import { collectionPageSchema } from "@/lib/schema";
 
 const DESCRIPTION =
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function BlogIndex() {
   const { isEnabled: preview } = await draftMode();
-  const allPosts = await getAllPostsForHome(preview);
+  const allPosts = withoutMovedPosts(await getAllPostsForHome(preview));
 
   return (
     <Container>

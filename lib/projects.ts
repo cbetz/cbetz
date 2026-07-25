@@ -12,16 +12,16 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     title: "Trove",
     oneLiner: "Open-source lookup tools and Claude skills for public healthcare data",
     blurb:
-      "Trove turns public-domain healthcare datasets that are widely cited but nearly impossible to use in raw form into clean, queryable bundles: CMS Medicare Cost Reports, IRS Form 990 Schedule H hospital financials, and FDA drug-approval reviews. Each dataset ships as both a search-first web lookup for people and an installable Claude skill for agents.",
+      "Federal healthcare data is public but barely usable: CMS publishes Medicare Cost Reports as headerless 100,000-row CSVs, the IRS ships Form 990s as bulk XML, and the FDA scatters drug-approval reviews across hundreds of PDF directories. Trove does the parsing, joining, and packaging. It covers 1,295 nonprofit hospital systems (CMS Worksheet S-10 against IRS 990 Schedule H, side by side) and 218 FDA novel drug approvals from 2021 to 2024 across both CDER and CBER. Every dataset ships twice: as a search-first web lookup for people, and as an installable Claude skill that reads the underlying filings at query time for agents.",
     category: "Healthcare AI",
     year: "2026",
     role: "Solo build",
-    stack: ["Next.js", "Claude Skill", "TypeScript"],
+    stack: ["Python", "TypeScript", "Claude Skill", "DuckDB", "Parquet"],
     highlights: [
-      "Packages opaque federal datasets (HCRIS cost reports, IRS 990 Schedule H, FDA approvals) into clean, queryable bundles",
-      "Dual-surfaced: a search-first web lookup for people and an installable Claude skill for agents",
-      "Decodes raw worksheet/line/column schemas so charity-care, beds, staffing, and trial evidence are usable without manual parsing",
-      "Open-source and built on public-domain data: reproducible and free to extend",
+      "Quantifies a real reporting gap: across 228 hospital systems whose CMS and IRS charity-care filings are both period-aligned and material, the median absolute difference is 25%",
+      "Ships a 44-variable semantic dictionary that decodes HCRIS worksheet/line/column codes into tidy DataFrames and partitioned Parquet",
+      "Dual-surfaced by design: a web lookup for people, plus fda-analyst and hcris-analyst Claude skills that read the actual filings and PDFs at query time",
+      "Fully reproducible from public-domain sources with two scripts, MIT-licensed, and careful about redistribution terms (CDC SVI bundled; UW ADI deliberately local-only)",
     ],
     featured: true,
     link: "https://troveproject.com",
@@ -29,20 +29,24 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
   },
   "last-ehr": {
     title: "Last EHR",
-    oneLiner: "Low-code platform for composing a headless EHR with AI agents",
+    oneLiner:
+      "A protocol and reference implementation for approval-gated AI agent writes on FHIR",
     blurb:
-      "Last EHR is a low-code platform for assembling healthcare software without rebuilding the foundations every time: pick a headless EHR, wire up the integrations you need, and layer in AI agents. The composable model lets clinical teams ship on top of existing systems instead of writing custom infrastructure.",
+      "When an AI agent writes to a patient chart, the step between \"the agent wants to write\" and \"the chart changed\" has no standard. CDS Hooks covers EHR-initiated suggestions, HL7's AI Transparency IG covers after-the-fact provenance, and MCP covers transport, but none of them define what an agent-initiated write a human must approve actually is. Last EHR specifies that missing layer as Approval-Gated Agent Writes on FHIR: Proposal, Decision, Commit, Audit. A write tool never executes; it emits the exact FHIR resource it would create and waits for a reviewer. Two independent implementations run in the repo, plus a conformance suite that verifies any implementation using its own FHIR reads.",
     category: "Healthcare AI",
-    year: "2024",
-    role: "Design + engineering",
-    stack: ["Next.js", "React", "AI agents"],
+    year: "2026",
+    role: "Solo build",
+    stack: ["TypeScript", "Next.js", "FHIR", "MCP", "Medplum"],
     highlights: [
-      "Composable, headless-EHR-first architecture: choose the EHR backend, then assemble integrations on top",
-      "AI agents as a first-class building block, not a bolt-on",
-      "Low-code surface aimed at cutting EHR build time so teams focus on clinical outcomes",
+      "Specifies a protocol, not just an app: Proposal to Decision to Commit to Audit, RFC 2119 language, extracted from two running implementations rather than designed on paper",
+      "Two conforming hosts from one spec: a web approval card and MCP elicitation-gated write tools, so the protocol is proven framework-neutral",
+      "Ships an executable conformance suite (npx @lastehr/agent-write-conformance) that verifies implementations against real FHIR reads instead of self-reported claims",
+      "A layer, not an EHR: runs on any headless FHIR backend (Medplum, HAPI, Firely, Aidbox), is never the system of record, and stores no PHI of its own",
+      "Published to npm and the official MCP Registry, with a zero-signup synthetic-data demo where every write passes through the approval gate",
     ],
     featured: true,
     link: "https://www.lastehr.com",
+    repo: "https://github.com/cbetz/last-ehr",
   },
   ratebook: {
     title: "Ratebook",
@@ -222,6 +226,26 @@ export const PROJECT_META: Record<string, ProjectMeta> = {
     link: null,
   },
 };
+
+// Which project each post is actually about. Case studies added after a post
+// went live are otherwise reachable only from /portfolio, and a page with one
+// inbound link is the page Google discovers but never bothers to crawl. These
+// pairs give each project an inbound link from an indexed post, and give each
+// post an onward path for readers who want the code.
+export const POST_PROJECT_LINKS: Record<string, string[]> = {
+  "rate-sheet-is-half-your-bill": ["ratebook"],
+  "same-brain-two-pairs-of-eyes": ["taskproof"],
+};
+
+// Reverse index, so a project page can list the writing about it.
+export const PROJECT_POST_LINKS: Record<string, string[]> = Object.entries(
+  POST_PROJECT_LINKS
+).reduce<Record<string, string[]>>((acc, [postSlug, projectSlugs]) => {
+  for (const projectSlug of projectSlugs) {
+    (acc[projectSlug] ??= []).push(postSlug);
+  }
+  return acc;
+}, {});
 
 // Display order: featured first, then most recent.
 export const PROJECT_ORDER = [

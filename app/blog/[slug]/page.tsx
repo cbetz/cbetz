@@ -7,15 +7,18 @@ import Container from "@/components/container";
 import JsonLd from "@/components/json-ld";
 import MoreItems from "@/components/more-items";
 import PostBody from "@/components/post-body";
+import RelatedLinks from "@/components/related-links";
 import { Separator } from "@/components/ui/separator";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
 import { withBlur } from "@/lib/blur";
+import { withoutMovedPosts } from "@/lib/moved";
+import { POST_PROJECT_LINKS, PROJECT_META } from "@/lib/projects";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
-  const allPosts = await getAllPostsWithSlug();
+  const allPosts = withoutMovedPosts(await getAllPostsWithSlug());
   return allPosts.map(({ slug }) => ({ slug }));
 }
 
@@ -59,6 +62,18 @@ export default async function Post({ params }: { params: Params }) {
   if (!rawPost) notFound();
   const post = await withBlur(rawPost);
 
+  const relatedProjects = (POST_PROJECT_LINKS[slug] ?? []).flatMap((projectSlug) => {
+    const meta = PROJECT_META[projectSlug];
+    if (!meta) return [];
+    return [
+      {
+        href: `/portfolio/${projectSlug}`,
+        title: meta.title,
+        description: meta.oneLiner,
+      },
+    ];
+  });
+
   return (
     <Container>
       <JsonLd
@@ -91,10 +106,16 @@ export default async function Post({ params }: { params: Params }) {
         <PostBody content={post.content} />
       </article>
 
+      <RelatedLinks title="The project behind this" links={relatedProjects} />
+
       <Separator className="my-12" />
       <AuthorBio />
       <div className="mt-16">
-        <MoreItems title="More writing" items={morePosts} hrefPrefix="/blog" />
+        <MoreItems
+          title="More writing"
+          items={withoutMovedPosts(morePosts)}
+          hrefPrefix="/blog"
+        />
       </div>
     </Container>
   );

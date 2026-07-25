@@ -40,6 +40,26 @@ export const personEntity = {
     addressRegion: "PA",
     addressCountry: "US",
   },
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Head of Engineering",
+    occupationalCategory: "15-1252.00 Software Developers",
+    occupationLocation: {
+      "@type": "City",
+      name: "Philadelphia",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "PA",
+        addressCountry: "US",
+      },
+    },
+    skills: [
+      "Engineering leadership",
+      "Applied AI",
+      "Healthcare software",
+      "FHIR and EHR integration",
+    ],
+  },
   knowsAbout: [
     "Software engineering",
     "Engineering leadership",
@@ -103,12 +123,17 @@ export function collectionPageSchema(opts: {
   };
 }
 
+// Bumped by hand when the bio or career history actually changes. Emitting
+// `new Date()` here re-dated the profile on every request, which asserts a
+// freshness that isn't real and teaches Google to ignore the field.
+const PROFILE_MODIFIED = "2026-07-24";
+
 export function profilePageSchema(path = "/about"): object {
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     url: `${SITE_URL}${path}`,
-    dateModified: new Date().toISOString(),
+    dateModified: PROFILE_MODIFIED,
     mainEntity: { "@id": PERSON_ID },
   };
 }

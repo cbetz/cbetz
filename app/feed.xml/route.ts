@@ -1,4 +1,5 @@
 import { getAllPostsForHome } from "@/lib/api";
+import { withoutMovedPosts } from "@/lib/moved";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cbetz.com";
@@ -16,7 +17,7 @@ function escapeXml(s: string): string {
 }
 
 export async function GET() {
-  const posts = (await getAllPostsForHome(false)) ?? [];
+  const posts = withoutMovedPosts((await getAllPostsForHome(false)) ?? []);
 
   const items = posts
     .map((post) => {

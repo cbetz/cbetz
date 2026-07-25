@@ -2,6 +2,7 @@ import {
   getAllPortfolioItemsWithSlug,
   getAllPostsWithSlug,
 } from "@/lib/api";
+import { withoutMovedPosts } from "@/lib/moved";
 import { enrichPortfolioItem, sortProjects } from "@/lib/projects";
 
 const SITE_URL =
@@ -13,9 +14,10 @@ export async function GET() {
     getAllPortfolioItemsWithSlug(),
   ]);
 
+  const livePosts = withoutMovedPosts(posts ?? []);
   const postLines =
-    posts && posts.length > 0
-      ? posts.map(
+    livePosts.length > 0
+      ? livePosts.map(
           (p) =>
             `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.excerpt}`
         )

@@ -1,0 +1,4 @@
+{
+  "$comment": "Content that has permanently moved off cbetz.com, as slug -> destination URL. next.config.js reads this to emit 308 redirects; lib/moved.ts reads it to keep moved slugs out of the sitemap, RSS feed, llms.txt, and the blog index. Both halves must agree: a redirecting URL left in the sitemap is what produces GSC's 'Page with redirect' not-indexed bucket, and excluding a slug without redirecting it just orphans a page that still ranks. ONLY add an entry once the destination URL is live in production, because the redirect takes effect on deploy and a 308 to a 404 throws away the ranking you are trying to move.",
+  "posts": {}
+}
